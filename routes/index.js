@@ -1,14 +1,37 @@
 var express = require("express");
 var router  = express.Router();
 var User=require("../models/user.js");
+var Labour= require("../models/labour.js");
 var passport=require("passport");
 const {requireRole} = require("../server/utils/role");
-//-------------
+
+
 //AUTH ROUTES
 //-----------
 //  REGISTER
 router.get("/register",function(req,res){
     res.render("register.ejs");
+});
+router.get("/labor", function(req, res){
+    Labour.find({}, function(err, alllabour){
+        if(!err)
+        {
+            console.log(alllabour);
+        }
+    });
+    res.sendFile("C:/Users/hp/webdev/hackathons/hackeamnsit/public/laborers.html");
+});
+router.post("/labor", function(req,res){
+   
+ Labour.create({email: req.body.email, 
+        latitude: req.body.latitude, 
+        longitude: req.body.longitude, 
+        number: req.body.number
+    }, function(err, labor){
+        //console.log(labor);
+        res.redirect('/labor');
+    });
+    
 });
 router.post("/register", function(req, res){
     console.log(req.body.role);
@@ -27,6 +50,7 @@ router.post("/register", function(req, res){
                 role="crop-buyer";
             }
     var newUser = new User({email: req.body.email,username: req.body.username,role:role});
+    
     console.log(newUser.role);
     User.register(newUser, req.body.password, function(err, user){
         if(err){
@@ -38,15 +62,15 @@ router.post("/register", function(req, res){
             //req.flash("success","Welcome to YelpCamp "+ req.body.username);
             if(req.body.role.farmer!=undefined)
             {
-                res.send("heya farmer here");
+                res.render("farmerProf.ejs");
             }
             else if(req.body.role.agrodealer!=undefined)
             {
-                res.send("heya agro here");
+                res.render("agroProf.ejs");
             }
-            else 
+            else if(req.body.role.crop-buyer!=undefined)
             {
-                res.send("heya crop-buyer here");
+                res.render("buyerProf.ejs");
             }
           // res.redirect("/login"); 
         });
@@ -58,20 +82,30 @@ router.get("/login",function(req,res){
     res.render("login");
 });
 router.get("/farmer",function(req,res){
-     res.send("heya farmer here");
+       console.log(req);
+      res.render("farmerProf", {farmer: req.user});
+
 });
 router.get("/agrodealer",function(req,res){
-     res.send("heya agro here");
+     console.log(req.user);
+    res.render("agroProf", {agrodealer: req.user});
+});
+router.get("/buyer", function(req, res){
+    res.render("buyerProf", {buyer: req.user});
 });
 router.post("/login", passport.authenticate("local", 
     {
         failureRedirect: "/login"
     }), function(req, res){
-            console.log(req.user.role );
-             if (req.user && req.user.role == "farmer")
+            console.log("success");
+             if (req.user){
+                if(req.user.role == "farmer")
                  res.redirect('/farmer');
-             else
+                else if(req.user.role == "agrodealer")
                 res.redirect("/agrodealer");
+                else if(req.user.role == "crop-buyer")
+                    res.redirect("/buyer");
+            }
         
 });
 // router.post("/login",requireRole("agrodealer"), passport.authenticate("local", 
