@@ -5,11 +5,48 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
   <link rel="stylesheet" type="text/css" href="/css/style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.min.css" >
-    
+  
+       <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyABXrzOdYntmVFt7vHZPMHEtAnvZLr7N-s&libraries=places"
+        ></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+   <style type="">
+        #map {
+        height: 100%;
+      }
+   </style>
+    <script type="text/javascript">
+
+  function getLocation()
+  {
+     navigator.geolocation.getCurrentPosition(function(position){
+     var loc = position.coords.latitude+","+position.coords.longitude;
+     var location = document.getElementById("latitude");
+     location.setAttribute('value', position.coords.latitude);
+     var longi = document.getElementById("longitude");
+     longi.setAttribute("value", position.coords.longitude);
+     });
+   }
+  </script>
 
 </head>
-<body>
-	 <div class="ui fixed inverted menu">
+<body onload="getLocation()">
+    <div id="map" class="ui container"></div>
+	<script type="text/javascript" src="/js/laborers.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- FORM RENDERING, LABOUR REUIREMENTS!! -->
+   <div class="ui fixed inverted menu">
             <div class="ui container">
                  <div class="header item"><a href="/"><i class="certificate icon"></i>KrishY</a></div>
                <a href="/buy.html" class="item"  style="float: right">Buy</a>
@@ -21,6 +58,23 @@
                 <a href="/awareness.html" class="item" style="float: right">Awareness</a>
                 
               </div></div>
+
               <h1 style="margin-top: 100px">Labourers Page</h1>
+                <form action="/labor" method="POST">
+                <label>
+                  Email: <input type="text" name="email">
+                </label>
+                <label>
+                  Number: <input type="text" name="number">
+                </label>
+                <label>
+                 Latitude: <input id="latitude" type="text" name="location" value="">
+                </label>
+                <label>
+                 Longitude: <input id="longitude" type="text" name="location" value="">
+                </label>
+
+                <button type="Submit">Submit</button>
+              </form>
 </body>
 </html>

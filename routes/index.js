@@ -1,6 +1,7 @@
 var express = require("express");
 var router  = express.Router();
 var User=require("../models/user.js");
+var Labour= require("../models/labour.js");
 var passport=require("passport");
 const {requireRole} = require("../server/utils/role");
 //-------------
@@ -9,6 +10,13 @@ const {requireRole} = require("../server/utils/role");
 //  REGISTER
 router.get("/register",function(req,res){
     res.render("register.ejs");
+});
+router.get("/labor", function(req, res){
+    res.sendFile("../public/laborers.html");
+});
+router.post("/labor", function(req,res){
+    console.log(req.body);
+    var newUser = new User({email: req.body.email, location: req.body.location, number: req.body.number});
 });
 router.post("/register", function(req, res){
     console.log(req.body.role);
@@ -38,15 +46,15 @@ router.post("/register", function(req, res){
             //req.flash("success","Welcome to YelpCamp "+ req.body.username);
             if(req.body.role.farmer!=undefined)
             {
-                res.send("heya farmer here");
+                res.render("farmerProf.ejs");
             }
             else if(req.body.role.agrodealer!=undefined)
             {
-                res.send("heya agro here");
+                res.render("agroProf.ejs");
             }
             else 
             {
-                res.send("heya crop-buyer here");
+                res.render("buyerProf.ejs");
             }
           // res.redirect("/login"); 
         });
@@ -58,10 +66,13 @@ router.get("/login",function(req,res){
     res.render("login");
 });
 router.get("/farmer",function(req,res){
-     res.send("heya farmer here");
+       console.log(req);
+      res.render("farmerProf", {farmer: req.user});
+
 });
 router.get("/agrodealer",function(req,res){
-     res.send("heya agro here");
+     console.log(req.user);
+    res.render("agroProf", {agrodealer: req.user});
 });
 router.post("/login", passport.authenticate("local", 
     {
@@ -108,3 +119,13 @@ router.get("/logout",function(req,res){
 });
 
 module.exports = router;
+
+
+
+
+
+
+
+
+
+
