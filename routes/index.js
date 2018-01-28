@@ -16,10 +16,12 @@ router.get("/labor", function(req, res){
     Labour.find({}, function(err, alllabour){
         if(!err)
         {
-            console.log(alllabour);
+         console.log(alllabour);
+         res.sendFile("C:/Users/hp/webdev/hackathons/hackeamnsit/public/laborers.html");
         }
+
     });
-    res.sendFile("C:/Users/hp/webdev/hackathons/hackeamnsit/public/laborers.html");
+   
 });
 router.post("/labor", function(req,res){
    
