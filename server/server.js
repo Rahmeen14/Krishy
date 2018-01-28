@@ -1,13 +1,22 @@
 var express = require('express');
+var app=express();
 const path= require('path');
+var bodyParser=require('body-parser');
 const http= require('http');
 const socketIO=require('socket.io');
+var mongoose=require("mongoose");
+app.use(bodyParser.urlencoded({extended: true}));
+app.set("view engine", "ejs");
 const public_path= path.join(__dirname, "../public");
 const {generateMessage, generateLocationMessage} = require("./utils/message");
 const {isRealString} = require("./utils/validation");
+const {requireRole} = require("./utils/role");
+mongoose.connect("mongodb://user:password@ds117128.mlab.com:17128/ruralhack");
 const {Users} = require("./utils/users");
-var app= express(); 
-//^^^this is our http server
+var User=require("../models/user.js");
+var passport=require("passport");
+var LocalStrategy=require("passport-local");
+var indexRoute=require("../routes/index.js");
 var users = new Users();
 var server= http.createServer(app);
 
@@ -15,6 +24,30 @@ var io = socketIO(server);
 //^^^ This is our web sockets server
 const port= process.env.PORT || 3000;
 app.use(express.static(public_path));
+//^^^this is our http server
+app.use(require("express-session")({
+    secret: "First project",
+    resave: false,
+    saveUninitialized: false
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+app.use(function(req, res, next){
+   res.locals.currentUser = req.user;
+   next();
+});
+app.use(indexRoute);
+
+
+
+
+
+
+// chat functionality
+
 
 io.on('connection', function(socket){
 	console.log("New User enters tadaaaa");

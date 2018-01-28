@@ -1,0 +1,43 @@
+<% include ./partials/header %>
+<div class="container">
+    <div class="row">
+         <div style="width:30% ; margin: 40px auto;">
+          <h3>Sign Up!</h3>  
+          </div>
+    <div style="width:30% ; margin: 0 auto;">
+    
+    <form action="/register" method="POST" class="form-horizontal">
+    <div class="form-group">
+         <label for="email"  class="col-sm-3 control-label">E-mail:</label>
+           <div class="col-sm-9 ">
+             <input type="text" placeholder="Enter e-mail" name="email">
+             </div>
+    </div>
+    <div class="form-group">
+         <label for="username"  class="col-sm-3 control-label">Username:</label>
+           <div class="col-sm-9 ">
+             <input type="text" placeholder="Enter username" name="username">
+             </div>
+    </div>
+    <div class="form-group">
+         <label for="password" class="col-sm-3 control-label">Password:</label>
+            <div class="col-sm-9 ">
+            <input type="password" placeholder="Enter password" name="password">
+            </div>
+    </div>
+     <div class="form-group">
+    <STRONG>Who are you?</STRONG>
+    <INPUT TYPE="radio" NAME="role[farmer]" VALUE="farmer">Farmer
+    <INPUT TYPE="radio" NAME="role[agrodealer]" VALUE="agrodealer">Agrodealer
+    <INPUT TYPE="radio" NAME="role[cropbuyer]" VALUE="cropbuyer">Cropbuyer
+    </div>
+     <div class="form-group ">
+           <div class="col-sm-offset-3 col-sm-9">
+        <button class="btn  btn-primary "> Submit</button>
+        </div>
+    </div>
+</form>
+</div>
+</div>
+</div>
+<% include ./partials/footer %>
