@@ -19,7 +19,7 @@
   function getLocation()
   {
      navigator.geolocation.getCurrentPosition(function(position){
-     var loc = position.coords.latitude+","+position.coords.longitude;
+     
      var location = document.getElementById("latitude");
      location.setAttribute('value', position.coords.latitude);
      var longi = document.getElementById("longitude");
@@ -68,10 +68,10 @@
                   Number: <input type="text" name="number">
                 </label>
                 <label>
-                 Latitude: <input id="latitude" type="text" name="location" value="">
+                 Latitude: <input id="latitude" type="text" name="latitude" value="">
                 </label>
                 <label>
-                 Longitude: <input id="longitude" type="text" name="location" value="">
+                 Longitude: <input id="longitude" type="text" name="longitude" value="">
                 </label>
 
                 <button type="Submit">Submit</button>

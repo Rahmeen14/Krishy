@@ -16,7 +16,7 @@ router.get("/labor", function(req, res){
 });
 router.post("/labor", function(req,res){
     console.log(req.body);
-    var newUser = new User({email: req.body.email, location: req.body.location, number: req.body.number});
+    var newUser = new User({email: req.body.email, latitude: req.body.latitude, longitude: req.body.longitude, number: req.body.number});
 });
 router.post("/register", function(req, res){
     console.log(req.body.role);
@@ -52,7 +52,7 @@ router.post("/register", function(req, res){
             {
                 res.render("agroProf.ejs");
             }
-            else 
+            else if(req.body.role.crop-buyer!=undefined)
             {
                 res.render("buyerProf.ejs");
             }
@@ -74,15 +74,22 @@ router.get("/agrodealer",function(req,res){
      console.log(req.user);
     res.render("agroProf", {agrodealer: req.user});
 });
+router.get("/buyer", function(req, res){
+    res.render("buyerProf", {buyer: req.user});
+});
 router.post("/login", passport.authenticate("local", 
     {
         failureRedirect: "/login"
     }), function(req, res){
-            console.log(req.user.role );
-             if (req.user && req.user.role == "farmer")
+            console.log("success");
+             if (req.user){
+                if(req.user.role == "farmer")
                  res.redirect('/farmer');
-             else
+                else if(req.user.role == "agrodealer")
                 res.redirect("/agrodealer");
+                else if(req.user.role == "crop-buyer")
+                    res.redirect("/buyer");
+            }
         
 });
 // router.post("/login",requireRole("agrodealer"), passport.authenticate("local", 
