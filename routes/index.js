@@ -18,8 +18,9 @@ router.get("/labor", function(req, res){
         {
             console.log(alllabour);
         }
+        res.sendFile("C:/Users/hp/webdev/hackathons/hackeamnsit/public/laborers.html");
     });
-    res.sendFile("C:/Users/hp/webdev/hackathons/hackeamnsit/public/laborers.html");
+    
 });
 router.post("/labor", function(req,res)
 {
