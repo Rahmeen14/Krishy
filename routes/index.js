@@ -62,15 +62,15 @@ router.post("/register", function(req, res){
             //req.flash("success","Welcome to YelpCamp "+ req.body.username);
             if(req.body.role.farmer!=undefined)
             {
-                res.render("farmerProf.ejs");
+                res.redirect("/farmer");
             }
             else if(req.body.role.agrodealer!=undefined)
             {
-                res.render("agroProf.ejs");
+                res.redirect("/agrodealer");
             }
             else if(req.body.role.crop-buyer!=undefined)
             {
-                res.render("buyerProf.ejs");
+                res.redirect("/buyer");
             }
           // res.redirect("/login"); 
         });
