@@ -5,12 +5,7 @@ var Labour= require("../models/labour.js");
 var passport=require("passport");
 const {requireRole} = require("../server/utils/role");
 
-Labour.find({}, function(err, alllabour){
-        if(!err)
-        {
-            console.log(alllabour);
-        }
-    });
+
 //AUTH ROUTES
 //-----------
 //  REGISTER
@@ -28,15 +23,12 @@ router.get("/labor", function(req, res){
 });
 router.post("/labor", function(req,res){
    
- var lab = Labour({email: req.body.email, 
+ Labour.create({email: req.body.email, 
         latitude: req.body.latitude, 
         longitude: req.body.longitude, 
         number: req.body.number
-    });
- lab.save(function(err, labor){
-        if(!err){
+    }, function(err, labor){
         //console.log(labor);
-    }
         res.redirect('/labor');
     });
     
@@ -150,13 +142,3 @@ router.get("/logout",function(req,res){
 });
 
 module.exports = router;
-
-
-
-
-
-
-
-
-
-

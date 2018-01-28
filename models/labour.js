@@ -9,7 +9,7 @@ var mongoose=require("mongoose");
     },
     latitude: {
         type: String,
-        required: true
+        
     },
    
      longitude: {
@@ -20,5 +20,7 @@ var mongoose=require("mongoose");
     }
 });
  
-
-module.exports= mongoose.model("Labour",labourSchema);
+/*var Labour = mongoose.model("Campground", campgroundSchema);
+module.exports= Campground;*/
+var Labour = mongoose.model("Labour", labourSchema);
+module.exports=Labour;
