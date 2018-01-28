@@ -16,6 +16,8 @@ var io = socketIO(server);
 const port= process.env.PORT || 3000;
 app.use(express.static(public_path));
 
+
+//Chat app functionality
 io.on('connection', function(socket){
 	console.log("New User enters tadaaaa");
 	
