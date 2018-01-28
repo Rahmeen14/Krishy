@@ -90,7 +90,7 @@ function scrollToBottom(){
  
 		});
 
-		var getLocation = $("#geoLoc");
+	var getLocation = $("#geoLoc");
     getLocation.on("click", function(){
       if(!navigator.geolocation){
         console.log("Unsupported on your Browser");

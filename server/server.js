@@ -49,6 +49,8 @@ app.use(indexRoute);
 // chat functionality
 
 
+
+//Chat app functionality
 io.on('connection', function(socket){
 	console.log("New User enters tadaaaa");
 	
