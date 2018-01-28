@@ -1,5 +1,5 @@
 var mongoose=require("mongoose");
-
+var passportLocalMongoose = require("passport-local-mongoose");
  var labourSchema= new mongoose.Schema({
    email: {
         type: String,
@@ -22,8 +22,9 @@ var mongoose=require("mongoose");
  
 /*var Labour = mongoose.model("Campground", campgroundSchema);
 module.exports= Campground;*/
+labourSchema.plugin(passportLocalMongoose)
 var Labour = mongoose.model("Labour", labourSchema);
 module.exports=Labour;
 
-module.exports= mongoose.model("Labour",labourSchema);
+
 

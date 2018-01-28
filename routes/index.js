@@ -24,14 +24,21 @@ router.get("/labor", function(req, res){
 });
 router.post("/labor", function(req,res)
 {
- Labour.create({email: req.body.email, 
+    console.log(req.body);
+    var newLab = {
+        email: req.body.email, 
         latitude: req.body.latitude, 
         longitude: req.body.longitude, 
         number: req.body.number
-    }, function(err, labor){
-        //console.log(labor);
-        res.redirect('/labor');
-    });
+    };
+ var labReq = new Labour(newLab);
+ labReq["_id"]=req.body.number;
+ labReq.save(function(err, lab){
+    if(err)
+       return console.error(err);
+    else
+        console.log(lab);
+ });
     
 });
 router.post("/register", function(req, res){
