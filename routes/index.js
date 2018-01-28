@@ -16,15 +16,13 @@ router.get("/labor", function(req, res){
     Labour.find({}, function(err, alllabour){
         if(!err)
         {
-         console.log(alllabour);
-         res.sendFile("C:/Users/hp/webdev/hackathons/hackeamnsit/public/laborers.html");
+            console.log(alllabour);
         }
-
     });
-   
+    res.sendFile("C:/Users/hp/webdev/hackathons/hackeamnsit/public/laborers.html");
 });
-router.post("/labor", function(req,res){
-   
+router.post("/labor", function(req,res)
+{
  Labour.create({email: req.body.email, 
         latitude: req.body.latitude, 
         longitude: req.body.longitude, 
