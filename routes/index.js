@@ -4,7 +4,13 @@ var User=require("../models/user.js");
 var Labour= require("../models/labour.js");
 var passport=require("passport");
 const {requireRole} = require("../server/utils/role");
-//-------------
+
+Labour.find({}, function(err, alllabour){
+        if(!err)
+        {
+            console.log(alllabour);
+        }
+    });
 //AUTH ROUTES
 //-----------
 //  REGISTER
@@ -12,11 +18,28 @@ router.get("/register",function(req,res){
     res.render("register.ejs");
 });
 router.get("/labor", function(req, res){
-    res.sendFile("../public/laborers.html");
+    Labour.find({}, function(err, alllabour){
+        if(!err)
+        {
+            console.log(alllabour);
+        }
+    });
+    res.sendFile("C:/Users/hp/webdev/hackathons/hackeamnsit/public/laborers.html");
 });
 router.post("/labor", function(req,res){
-    console.log(req.body);
-    var newUser = new User({email: req.body.email, latitude: req.body.latitude, longitude: req.body.longitude, number: req.body.number});
+   
+ var lab = Labour({email: req.body.email, 
+        latitude: req.body.latitude, 
+        longitude: req.body.longitude, 
+        number: req.body.number
+    });
+ lab.save(function(err, labor){
+        if(!err){
+        //console.log(labor);
+    }
+        res.redirect('/labor');
+    });
+    
 });
 router.post("/register", function(req, res){
     console.log(req.body.role);
@@ -35,6 +58,7 @@ router.post("/register", function(req, res){
                 role="crop-buyer";
             }
     var newUser = new User({email: req.body.email,username: req.body.username,role:role});
+    
     console.log(newUser.role);
     User.register(newUser, req.body.password, function(err, user){
         if(err){
