@@ -9,7 +9,7 @@ var passportLocalMongoose = require("passport-local-mongoose");
     },
     latitude: {
         type: String,
-       
+
     },
    
      longitude: {
@@ -21,5 +21,10 @@ var passportLocalMongoose = require("passport-local-mongoose");
 });
  
 
+/*var Labour = mongoose.model("Campground", campgroundSchema);
+module.exports= Campground;*/
 labourSchema.plugin(passportLocalMongoose)
-module.exports= mongoose.model("Labour",labourSchema);
+var Labour = mongoose.model("Labour", labourSchema);
+module.exports=Labour;
+
+

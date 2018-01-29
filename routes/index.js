@@ -19,9 +19,9 @@ router.get("/labor", function(req, res){
             console.log(alllabour);
             res.sendFile("C:/Users/hp/webdev/hackathons/hackeamnsit/public/laborers.html");
         }
-    });
+       
    
-});
+}); });
 router.post("/labor", function(req,res)
 {
  var lab = new Labour({
@@ -37,6 +37,7 @@ router.post("/labor", function(req,res)
     }
     else
         console.log(err);
+
  });
     
 });
