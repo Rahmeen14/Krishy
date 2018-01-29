@@ -17,13 +17,20 @@ var passportLocalMongoose = require("passport-local-mongoose");
     },
     number: {
         type: Number
-    }
+    },
+    username: {
+      id:{ 
+         type:mongoose.Schema.Types.ObjectId,
+         ref:"User"
+      },
+      username: String
+   }
 });
  
 
 /*var Labour = mongoose.model("Campground", campgroundSchema);
 module.exports= Campground;*/
-labourSchema.plugin(passportLocalMongoose)
+//labourSchema.plugin(passportLocalMongoose)
 var Labour = mongoose.model("Labour", labourSchema);
 module.exports=Labour;
 

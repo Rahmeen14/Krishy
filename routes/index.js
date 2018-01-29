@@ -24,11 +24,16 @@ router.get("/labor", function(req, res){
 }); });
 router.post("/labor", function(req,res)
 {
+    var username={
+        id:req.user._id,
+        username:req.user.username
+    };
  var lab = new Labour({
     email: req.body.email,
     latitude: req.body.latitude,
     longitude: req.body.longitude,
-    number: req.body.number
+    number: req.body.number,
+    username:username
  });
  lab.save(function(err){
     if(!err){
