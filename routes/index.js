@@ -17,24 +17,31 @@ router.get("/labor", function(req, res){
         if(!err)
         {
             console.log(alllabour);
+            res.sendFile("C:/Users/hp/webdev/hackathons/hackeamnsit/public/laborers.html");
         }
     });
-    res.sendFile("C:/Users/hp/webdev/hackathons/hackeamnsit/public/laborers.html");
+   
 });
 router.post("/labor", function(req,res)
 {
- Labour.create({email: req.body.email, 
-        latitude: req.body.latitude, 
-        longitude: req.body.longitude, 
-        number: req.body.number
-    }, function(err, labor){
-        //console.log(labor);
-        res.redirect('/labor');
-    });
+ var lab = new Labour({
+    email: req.body.email,
+    latitude: req.body.latitude,
+    longitude: req.body.longitude,
+    number: req.body.number
+ });
+ lab.save(function(err){
+    if(!err){
+        console.log("Saved");
+        res.redirect("/labor");
+    }
+    else
+        console.log(err);
+ });
     
 });
 router.post("/register", function(req, res){
-    console.log(req.body.role);
+    //console.log(req.body.role);
     //var role =String(req.body.role);
     var role;
      if(req.body.role.farmer!=undefined)
@@ -51,7 +58,7 @@ router.post("/register", function(req, res){
             }
     var newUser = new User({email: req.body.email,username: req.body.username,role:role});
     
-    console.log(newUser.role);
+   // console.log(newUser.role);
     User.register(newUser, req.body.password, function(err, user){
         if(err){
             //req.flash("error",err.message);
@@ -82,12 +89,12 @@ router.get("/login",function(req,res){
     res.render("login");
 });
 router.get("/farmer",function(req,res){
-       console.log(req);
+      // console.log(req);
       res.render("farmerProf", {farmer: req.user});
 
 });
 router.get("/agrodealer",function(req,res){
-     console.log(req.user);
+     //console.log(req.user);
     res.render("agroProf", {agrodealer: req.user});
 });
 router.get("/buyer", function(req, res){
