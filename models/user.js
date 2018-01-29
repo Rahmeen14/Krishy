@@ -18,6 +18,9 @@ var userSchema= new mongoose.Schema({
     },
      password: {
         type: String
+    },
+      phone: {
+        type: String
     }
 });
 userSchema.plugin(passportLocalMongoose)

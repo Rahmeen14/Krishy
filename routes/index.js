@@ -2,6 +2,9 @@ var express = require("express");
 var router  = express.Router();
 var User=require("../models/user.js");
 var Labour= require("../models/labour.js");
+var Farmer= require("../models/farmer.js");
+var Agrodealer= require("../models/agrodealer.js");
+var Cropbuyer= require("../models/cropbuyer.js");
 var passport=require("passport");
 const {requireRole} = require("../server/utils/role");
 
@@ -49,10 +52,13 @@ router.post("/labor", function(req,res)
 router.post("/register", function(req, res){
     //console.log(req.body.role);
     //var role =String(req.body.role);
+
+   
     var role;
      if(req.body.role.farmer!=undefined)
             {
                 role="farmer";
+               
             }
             else if(req.body.role.agrodealer!=undefined)
             {
@@ -60,9 +66,9 @@ router.post("/register", function(req, res){
             }
             else 
             {
-                role="crop-buyer";
+                role="cropbuyer";
             }
-    var newUser = new User({email: req.body.email,username: req.body.username,role:role});
+            var newUser = new User({email: req.body.email,username: req.body.username,role:role,phone:req.body.phone});
     
    // console.log(newUser.role);
     User.register(newUser, req.body.password, function(err, user){
@@ -73,17 +79,56 @@ router.post("/register", function(req, res){
         }
         passport.authenticate("local")(req, res, function(){
             //req.flash("success","Welcome to YelpCamp "+ req.body.username);
+            console.log("user is");
+            console.log(user);
+              var username={
+            id:user._id,
+            username:user.username
+            };
             if(req.body.role.farmer!=undefined)
             {
-                res.redirect("/farmer");
+                 var farmer = new Farmer({email: user.email,phone:user.phone,username:username});
+                farmer.save(function(err){
+            if(!err){
+                console.log("Saved");
+            res.redirect("/login");
+            }
+            else
+            {
+                console.log(err);
+            }
+            
+             }); //  res.redirect("/login");
             }
             else if(req.body.role.agrodealer!=undefined)
             {
-                res.redirect("/agrodealer");
+                 var agrodealer = new Agrodealer({email: user.email,phone:user.phone,username:username});
+                agrodealer.save(function(err){
+            if(!err){
+                console.log("Saved");
+            res.redirect("/login");
             }
-            else if(req.body.role.crop-buyer!=undefined)
+            else
             {
-                res.redirect("/buyer");
+                console.log(err);
+            }
+            
+             });
+            }
+            else if(req.body.role.cropbuyer!=undefined)
+            {
+                var cropbuyer = new Cropbuyer({email: user.email,phone:user.phone,username:username});
+                cropbuyer.save(function(err){
+            if(!err){
+                console.log("Saved");
+            res.redirect("/login");
+            }
+            else
+            {
+                console.log(err);
+            }
+            
+             });
             }
           // res.redirect("/login"); 
         });
@@ -95,28 +140,69 @@ router.get("/login",function(req,res){
     res.render("login");
 });
 router.get("/farmer",function(req,res){
-      // console.log(req);
-      res.render("farmerProf", {farmer: req.user});
+       console.log(req.user);
+       Farmer.find({"email":req.user.email},function(err,allfarmers)
+   {
+       if(err)
+       {
+           console.log(err);
+       }
+       else
+       {
+            console.log("here");
+            console.log(allfarmers);
+            res.render("farmerProf", {farmer: allfarmers[0]});
+       }
+   });
+      
 
 });
 router.get("/agrodealer",function(req,res){
      //console.log(req.user);
-    res.render("agroProf", {agrodealer: req.user});
+      console.log(req.user);
+       Agrodealer.find({"email":req.user.email},function(err,agro)
+   {
+       if(err)
+       {
+           console.log(err);
+       }
+       else
+       {
+            console.log("here");
+            console.log(agro);
+            res.render("agroProf", {agrodealer: agro[0]});
+       }
+   });
+   // res.render("agroProf", {agrodealer: req.user});
 });
 router.get("/buyer", function(req, res){
-    res.render("buyerProf", {buyer: req.user});
+     Cropbuyer.find({"email":req.user.email},function(err,buyer)
+   {
+       if(err)
+       {
+           console.log(err);
+       }
+       else
+       {
+            console.log("here");
+            console.log(buyer);
+            res.render("buyerProf", {buyer: buyer[0]});
+       }
+   });
+    //res.render("buyerProf", {buyer: req.user});
 });
 router.post("/login", passport.authenticate("local", 
     {
         failureRedirect: "/login"
     }), function(req, res){
             console.log("success");
+             // console.log(req.user);
              if (req.user){
                 if(req.user.role == "farmer")
                  res.redirect('/farmer');
                 else if(req.user.role == "agrodealer")
                 res.redirect("/agrodealer");
-                else if(req.user.role == "crop-buyer")
+                else if(req.user.role == "cropbuyer")
                     res.redirect("/buyer");
             }
         
