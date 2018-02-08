@@ -25,32 +25,46 @@ router.get("/labor", function(req, res){
 
         }
         console.log(__dirname);
-       res.sendFile("C:/users/hp/webdev/hackathons/hackeamnsit/public/laborers.html");
+       res.sendFile("C:/Users/hp/Desktop/hackeam/hack/public/laborers.html");
    
 }); });
 router.post("/labor", function(req,res)
 {
-  console.log(res);
-    var username={
-        id:req.user._id,
-        username:req.user.username
-    };
- var lab = new Labour({
-    email: req.body.email,  
-    latitude: req.body.latitude,
-    longitude: req.body.longitude,
-    number: req.body.number,
-    username:username
- });
- lab.save(function(err){
-    if(!err){
-        console.log("Saved");
-        res.redirect("/labor");
-    }
-    else
-        console.log(err);
 
- });
+  console.log(req);
+   User.find({"email":req.body.email},function(err,allusers)
+   {
+       if(err)
+       {
+           console.log(err);
+       }
+       else
+       {
+            console.log("here");
+             var username={
+            id:allusers[0]._id,
+            username:allusers[0].username
+          };
+           var lab = new Labour({
+            email: req.body.email,
+            latitude: req.body.latitude,
+            longitude: req.body.longitude,
+            number: req.body.number,
+            username:username
+          });
+
+      lab.save(function(err){
+        if(!err){
+          console.log("Saved");
+          res.redirect("/labor");
+      }
+
+      });
+            
+    }
+});
+   
+
     
 });
 router.post("/register", function(req, res){
