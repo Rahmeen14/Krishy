@@ -12,11 +12,7 @@
           position: loc,
           map: map
         }); 
-
-        
-
-       
-       
+      
       }
 
    navigator.geolocation.getCurrentPosition(initMap);

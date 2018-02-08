@@ -15,20 +15,7 @@
       }
    </style>
     <script type="text/javascript">
-       function loadJSON(file, callback) {
 
-    var xobj = new XMLHttpRequest();
-    xobj.overrideMimeType("application/json");
-    xobj.open('GET', file, true); // Replace 'my_data' with the path to your file
-    xobj.onreadystatechange = function () {
-        if (xobj.readyState == 4 && xobj.status == "200") {
-            // Required use of an anonymous callback as .open will NOT return a value but simply returns undefined in asynchronous mode
-            callback(xobj.responseText);
-        }
-    };
-    xobj.send(null);
-}
- 
   function getLocation()
   {
      navigator.geolocation.getCurrentPosition(function(position){
@@ -39,10 +26,17 @@
      longi.setAttribute("value", position.coords.longitude);
      });
    }
-   function initMap(location) {
-        directionsService = new google.maps.DirectionsService();
-        directionsDisplay = new google.maps.DirectionsRenderer();
-        var loc = new google.maps.LatLng(location.coords.latitude,location.coords.longitude);
+  </script>
+
+</head>
+<body onload="getLocation()">
+    <div id="map" class="ui container"></div>
+	
+  <script>
+     function initMap(location) {
+         directionsService = new google.maps.DirectionsService();
+          directionsDisplay = new google.maps.DirectionsRenderer();
+          var loc = new google.maps.LatLng(location.coords.latitude,location.coords.longitude);
         map = new google.maps.Map(document.getElementById('map'), {
           mapTypeControl: false,
           zoom: 7,
@@ -53,50 +47,21 @@
           position: loc,
           map: map
         }); 
-
-        loadJSON("C:/users/hp/webdev/hackathons/hackeamnsit/labour.json", function(data){
-          $.each(data, function(i, f) {
-       var loc = new google.maps.LatLng(f.latitude,f.longitude);
       
-       var marker = new google.maps.Marker({
-          position: loc,
-          map: map
-        });   
-     });
-        });
-             /*$.getJSON('labour.json', function(data) {
-       $.each(data, function(i, f) {
-       var loc = new google.maps.LatLng(f.latitude,f.longitude);
-      
-       var marker = new google.maps.Marker({
-          position: loc,
-          map: map
-        });   
-     });
-
-   });*/
       }
 
    navigator.geolocation.getCurrentPosition(initMap);
-   
+   <%labReq.forEach(entry){%>
+    var loc = new google.maps.LatLng(<%=entry.latitude%>,<%=entry.longitude%>);
+       var marker = new google.maps.Marker({
+          position: loc,
+          map: map
+        }); 
+  <%}%>
+
+    //console.log(v);
+  
   </script>
-
-</head>
-<body onload="getLocation()">
-    <div id="map" class="ui container"></div>
-	<script type="text/javascript" src="/js/laborers.js"></script>
-
-
-
-
-
-
-
-
-
-
-
-
 
 <!-- FORM RENDERING, LABOUR REUIREMENTS!! -->
    <div class="ui fixed inverted menu">
@@ -104,7 +69,7 @@
                  <div class="header item"><a href="/"><i class="certificate icon"></i>KrishY</a></div>
                <a href="/buy.html" class="item"  style="float: right">Buy</a>
                 <a href="/sell.html" class="item" style="float: right">Sell</a>
-                <a href="/labor" class="item" style="float: right">Find Laborers</a>
+                <a href="/laborers.html" class="item" style="float: right">Find Laborers</a>
                 <a href="/report.html" class="item" style="float: right">Report</a>
                 <a href="/cropSustainability.html" class="item" style="float: right">Am I growing the right crop?</a>
                 <a href="/chatTab.html" class="item"  style="float: right">Want to Chat?</a>
@@ -126,6 +91,7 @@
                 </label>
                 <label>
                  Longitude: <input id="longitude" type="text" name="longitude" value="">
+
 
                 </label>
             

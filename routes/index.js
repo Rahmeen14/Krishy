@@ -7,7 +7,7 @@ var Agrodealer= require("../models/agrodealer.js");
 var Cropbuyer= require("../models/cropbuyer.js");
 var passport=require("passport");
 const {requireRole} = require("../server/utils/role");
-
+const fs = require('fs');
 
 //AUTH ROUTES
 //-----------
@@ -19,10 +19,13 @@ router.get("/labor", function(req, res){
     Labour.find({}, function(err, alllabour){
         if(!err)
         {
-            console.log(alllabour);
-            res.sendFile("C:/Users/hp/webdev/hackathons/hackeamnsit/public/laborers.html");
+           var data = JSON.stringify(alllabour);
+            fs.writeFileSync('labour.json', data); 
+            //res.render("laborers", {labReq: alllabour});
+
         }
-       
+        console.log(__dirname);
+       res.sendFile("C:/users/hp/webdev/hackathons/hackeamnsit/public/laborers.html");
    
 }); });
 router.post("/labor", function(req,res)
