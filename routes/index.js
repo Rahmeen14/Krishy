@@ -30,27 +30,42 @@ router.get("/labor", function(req, res){
 }); });
 router.post("/labor", function(req,res)
 {
-  console.log(req.body);
-    var username={
-        id:req.user._id,
-        username:req.user.username
-    };
- var lab = new Labour({
-    email: req.body.email,
-    latitude: req.body.latitude,
-    longitude: req.body.longitude,
-    number: req.body.number,
-    username:username
- });
- lab.save(function(err){
-    if(!err){
-        console.log("Saved");
-        res.redirect("/labor");
-    }
+  console.log(req);
+   User.find({"email":req.body.email},function(err,allusers)
+   {
+       if(err)
+       {
+           console.log(err);
+       }
+       else
+       {
+            console.log("here");
+             var username={
+            id:allusers[0]._id,
+            username:allusers[0].username
+          };
+           var lab = new Labour({
+            email: req.body.email,
+            latitude: req.body.latitude,
+            longitude: req.body.longitude,
+            number: req.body.number,
+            username:username
+          });
+
+      lab.save(function(err){
+        if(!err){
+          console.log("Saved");
+          res.redirect("/labor");
+      }
     else
         console.log(err);
 
- });
+      });
+            
+    }
+});
+   
+
     
 });
 router.post("/register", function(req, res){
