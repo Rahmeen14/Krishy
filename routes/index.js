@@ -30,12 +30,13 @@ router.get("/labor", function(req, res){
 }); });
 router.post("/labor", function(req,res)
 {
+  console.log(res);
     var username={
         id:req.user._id,
         username:req.user.username
     };
  var lab = new Labour({
-    email: req.body.email,
+    email: req.body.email,  
     latitude: req.body.latitude,
     longitude: req.body.longitude,
     number: req.body.number,
