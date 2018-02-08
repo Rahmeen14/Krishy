@@ -25,11 +25,12 @@ router.get("/labor", function(req, res){
 
         }
         console.log(__dirname);
-       res.sendFile("C:/users/hp/webdev/hackathons/hackeamnsit/public/laborers.html");
+       res.sendFile("C:/Users/hp/Desktop/hackeam/hack/public/laborers.html");
    
 }); });
 router.post("/labor", function(req,res)
 {
+  console.log(req.body);
     var username={
         id:req.user._id,
         username:req.user.username
