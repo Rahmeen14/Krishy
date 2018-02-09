@@ -17,8 +17,8 @@
             <div class="ui container">
                 <div class="header item"><a href="/"><i class="certificate icon"></i>KrishY</a></div>
                 <a href="/buy.html" class="item"  style="float: right">Buy</a>
-                <a href="/sell.html" class="item" style="float: right">Sell</a>
                 <a href="/labor" class="item" style="float: right">Find Laborers</a>
+                 <a href="/<%=farmer.username.id%>/items/new" class="item">Sell</a>
                 <a href="/report/<%=farmer.username.id%>" class="item" style="float: right">Report</a>
                 <a href="/cropSustainability.html" class="item" style="float: right">Am I growing the right crop?</a>
                 <a href="/chatTab.html" class="item"  style="float: right">Want to Chat?</a>
@@ -33,5 +33,36 @@
             <h1 style="margin-top: 60px"><%=farmer.username.username%></h1>
             <h3><%=farmer.email%></h3>
 
-</body>
-</html>
+ <div class="ui main text container segment">
+        <div class="ui huge header">Items Site</div>
+        <div class="ui top attached ">
+                <div class="ui divided items">
+                    <% items.forEach(function(item){ %>
+                    <div class="item">
+                         <div class="image ui medium rounded" style="margin-bottom: 25px"><img src="<%= item.image%>">
+                         </div>
+                    </div>
+                    <div class="content" style="margin-bottom: 25px">
+                     <a class="ui header" href="<%=farmer.username.id%>/items/<%= item._id%>" > <%= item.name %>
+                     </a>
+                    </div> 
+           <div class="description" style="margin-bottom: 25px">
+            <p><%- item.content %> 
+            <p><%= item.type %></p>
+            <p><%= item.author %></p>
+            <p><%= item.phone %></p>
+            <p><%= item.cost %></p>
+            </p>
+        </div>    
+        <div class="extra" style="margin-bottom: 25px">
+             <a class="ui button blue basic" href="/<%=farmer.username.id%>/items/<%= item._id%>/edit">Edit Post</a>
+        <form action="/<%=farmer.username.id%>/items/<%=item._id%>?_method=DELETE" method="POST" style="display: inline">
+        <input type="submit" class="ui button red basic" value="Delete">
+        </a></div>
+        <%});%>
+                
+            </div>
+        </div>
+        
+        </div>
+        <% include partials/footer%>
