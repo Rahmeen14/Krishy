@@ -19,7 +19,8 @@
                 
                 <a href="/sell.html" class="item" style="float: right">Sell</a>
                 
-                <a href="/report" class="item" style="float: right">Report</a>
+                <a href="/<%=agrodealer.username.id%>/report" class="item" style="float: right">Report</a>
+                  <a href="/<%=agrodealer.username.id%>/items/new" class="item">NEW POST</a>
                 
                 <a href="/chatTab.html" class="item"  style="float: right">Want to Chat?</a>
                 <a href="/awareness.html" class="item" style="float: right">Awareness</a>
@@ -33,5 +34,36 @@
             <h1 style="margin-top: 60px"><%=agrodealer.username.username%></h1>
             <h3><%=agrodealer.email%></h3>
 
-</body>
-</html>
+        <div class="ui main text container segment">
+        <div class="ui huge header">Items Site</div>
+        <div class="ui top attached ">
+                <div class="ui divided items">
+                    <% items.forEach(function(item){ %>
+                    <div class="item">
+                         <div class="image ui medium rounded" style="margin-bottom: 25px"><img src="<%= item.image%>">
+                         </div>
+                    </div>
+                    <div class="content" style="margin-bottom: 25px">
+                     <a class="ui header" href="<%=agrodealer.username.id%>/items/<%= item._id%>" > <%= item.name %>
+                     </a>
+                    </div> 
+           <div class="description" style="margin-bottom: 25px">
+            <p><%- item.content %> 
+            <p><%= item.type %></p>
+            <p><%= item.author %></p>
+            <p><%= item.phone %></p>
+            <p><%= item.cost %></p>
+            </p>
+        </div>    
+        <div class="extra" style="margin-bottom: 25px">
+             <a class="ui button blue basic" href="/<%=agrodealer.username.id%>/items/<%= item._id%>/edit">Edit Post</a>
+        <form action="/<%=agrodealer.username.id%>/items/<%=item._id%>?_method=DELETE" method="POST" style="display: inline">
+        <input type="submit" class="ui button red basic" value="Delete">
+        </a></div>
+        <%});%>
+                
+            </div>
+        </div>
+        
+        </div>
+        <% include partials/footer%>

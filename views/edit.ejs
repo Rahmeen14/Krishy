@@ -1,0 +1,43 @@
+<% include partials2/header%>
+    <div class= "ui main container segment">
+        <div class ="ui huge header">New item</div>
+        <form  class= "ui fluid form" action="/<%=id%>/items" method="POST">
+          <div class="field">
+                <label>Item Type:</label>
+                <select name="item[type]" value="<%= item.type%>>
+                <option value="Fertiliser/Pesticide">Fertiliser/Pesticide</option>
+                <option value="Seeds">Seeds</option>
+                <option value="Machinery">Machinery</option>
+            </select>
+            </div>
+            <div class="field">
+                <label>Name</label>
+            <input type="text" value="<%= item.name%>" name="item[name]">
+            </div>
+            <div class="field">
+                 <label>item Post</label>
+                <textarea name="item[content]" value="<%= item.content%>" ></textarea>
+            </div>
+            <div class="field">
+                 <label>Image url</label>
+                <input type="text" value="<%= item.image%>" name="item[image]">
+            </div>
+            <div class="field">
+                 <label>Author</label>
+                <input type="text" value="<%= item.author%>" name="item[author]">
+            </div>
+            <div class="field">
+                 <label>Cost</label>
+                <input type="text" value="<%= item.cost%>" name="item[cost]">
+            </div>
+            <div class="field">
+                 <label>Phone Number:</label>
+                <input type="text" value="<%= item.phone%>" name="item[phone]">
+            </div>
+            
+            <div class="field"> <input class="button ui primary" type="submit">
+            </div>
+           
+        </form>
+    </div>
+<% include partials/footer%>
