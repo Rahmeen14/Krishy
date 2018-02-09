@@ -25,24 +25,26 @@ router.post("/report/:id", function(req, res){
        }
        else
        {
+        var role = found.role;
+            console.log(req.body.user);
             console.log(found);
             var username={
             id:req.params.id,
             username:found.username
           };
            var report = new Report({
-           name: req.user.name,
-           culprit: req.user.culpritName,
-           malpractice: req.user.malpractice,
-           pin: req.user.pincode,
-           location: req.user.location,
+           name: req.body.user.name,
+           culprit: req.body.user.culpritName,
+           malpractice: req.body.user.malpractice,
+           pin: req.body.user.pincode,
+           location: req.body.user.location,
            username: username
           });
 
       report.save(function(err){
         if(!err){
           console.log("Saved");
-          res.redirect("/farmer/"+req.params.id);
+          res.redirect("/"+role+"/"+req.params.id);
       }
 
       });
@@ -213,9 +215,9 @@ router.get("/farmer/:id",function(req,res){
 
 });
 router.get("/agrodealer/:id",function(req,res){
-     //console.log(req.user);
-      console.log(req.user);
-       Agrodealer.find({"email":req.user.email},function(err,agro)
+
+   User.findById(req.params.id, function(err, useR){
+   Agrodealer.find({"email":useR.email},function(err,agro)
    {
        if(err)
        {
@@ -229,7 +231,7 @@ router.get("/agrodealer/:id",function(req,res){
        }
    });
    // res.render("agroProf", {agrodealer: req.user});
-});
+}); });
 router.get("/buyer/:id", function(req, res){
      Cropbuyer.find({"email":req.user.email},function(err,buyer)
    {

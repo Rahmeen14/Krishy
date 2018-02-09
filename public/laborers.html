@@ -32,7 +32,7 @@
         var loc = new google.maps.LatLng(location.coords.latitude,location.coords.longitude);
         map = new google.maps.Map(document.getElementById('map'), {
           mapTypeControl: false,
-          zoom: 7,
+          zoom: 8,
           center: loc,
           mapTypeId: 'terrain'
         });
@@ -43,11 +43,16 @@
       $.getJSON('labour.json', function(data) {
        $.each(data, function(i, f) {
        var loc = new google.maps.LatLng(f.latitude,f.longitude);
-      
+       var  infoWindow = new google.maps.InfoWindow;
+       infoWindow.setPosition(loc);
+       var requirement = f.number+" "
+       infoWindow.setContent(requirement);
+       infoWindow.open(map);
        var marker = new google.maps.Marker({
           position: loc,
           map: map
         });   
+
      });
 
    });
@@ -81,7 +86,6 @@
                <a href="/buy.html" class="item"  style="float: right">Buy</a>
                 <a href="/sell.html" class="item" style="float: right">Sell</a>
                 <a href="/labor" class="item" style="float: right">Find Laborers</a>
-                <a href="/report.html" class="item" style="float: right">Report</a>
                 <a href="/cropSustainability.html" class="item" style="float: right">Am I growing the right crop?</a>
                 <a href="/chatTab.html" class="item"  style="float: right">Want to Chat?</a>
                 <a href="/awareness.html" class="item" style="float: right">Awareness</a>
