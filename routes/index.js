@@ -351,7 +351,7 @@ router.delete("/:sid/items/:id", function(req, res){
     Item.findByIdAndRemove(req.params.id, function(err){
         if(!err)
         {
-            res.redirect("/items");
+            res.redirect("/agrodealer/"+req.params.sid);
         }
         else
         {
