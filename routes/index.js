@@ -5,6 +5,7 @@ var Labour= require("../models/labour.js");
 var Farmer= require("../models/farmer.js");
 var Agrodealer= require("../models/agrodealer.js");
 var Cropbuyer= require("../models/cropbuyer.js");
+var Item= require("../models/item.js");
 var passport=require("passport");
 var Report= require("../models/report.js");
 const {requireRole} = require("../server/utils/role");
@@ -216,8 +217,9 @@ router.get("/farmer/:id",function(req,res){
 });
 router.get("/agrodealer/:id",function(req,res){
 
-   User.findById(req.params.id, function(err, useR){
-   Agrodealer.find({"email":useR.email},function(err,agro)
+     //console.log(req.user);
+      console.log(req.user);
+       Agrodealer.find({"username.id":req.user.id},function(err,agro)
    {
        if(err)
        {
@@ -227,7 +229,16 @@ router.get("/agrodealer/:id",function(req,res){
        {
             console.log("here");
             console.log(agro);
-            res.render("agroProf", {agrodealer: agro[0]});
+             Item.find({"username.id":req.params.id}, function(err, items){
+        if(err)
+        {
+            console.log(err);
+        }
+        else
+        // res.render("items", {items: items});
+       res.render("agroProf", {agrodealer: agro[0],items:items});
+        });
+            
        }
    });
    // res.render("agroProf", {agrodealer: req.user});
@@ -263,6 +274,92 @@ router.post("/login", passport.authenticate("local",
                     res.redirect("/buyer/"+req.user._id);
             }
         
+});
+
+router.put("/:sid/items/:id", function(req, res){
+    Item.findByIdAndUpdate(req.params.id, req.body.item, function(err, founditem){
+        if(err)
+        console.log("Error has occured");
+        else
+        res.redirect("/items/"+req.params.id);
+    });
+});    
+    
+router.get("/:sid/items/:id/edit", function(req, res){
+    Item.findById(req.params.id, function(err, founditem){
+        if(err)
+        {
+            console.log("Error has been made");
+        }
+        else
+        {
+             res.render("edit", {item: founditem,id:req.params.sid});
+        }
+    });
+});
+
+
+router.get("/:sid/items/new", function(req, res){
+    res.render("new",{id:req.params.sid});
+    
+});
+
+router.post("/:sid/items", function(req, res){
+    //Item.create(req.body.item, function(err, newitem){
+      var sid=req.params.sid;
+    User.findById(req.params.sid,function(err,found)
+   {
+       if(err)
+       {
+           console.log(err);
+       }
+       else
+       {
+            console.log(found);
+            var username={
+            id:req.params.sid,
+            username:found.username
+          };
+           var item = new Item({
+           name: req.body.item.name,
+           content: req.body.item.content,
+           type: req.body.item.type,
+           image: req.body.item.image,
+           author: req.body.item.author,
+           cost: req.body.item.cost,
+           phone: req.body.item.phone,
+           username: username
+          });
+
+      item.save(function(err){
+        if(!err){
+          console.log("Saved");
+          res.redirect("/agrodealer/"+req.params.sid);
+      }
+
+      });
+            
+    }
+});
+        
+      //  res.redirect("/items");
+    //});
+    
+});
+
+router.delete("/:sid/items/:id", function(req, res){
+    Item.findByIdAndRemove(req.params.id, function(err){
+        if(!err)
+        {
+            res.redirect("/items");
+        }
+        else
+        {
+            console.log("Error occured");
+            
+        }
+        
+    });
 });
 // router.post("/login",requireRole("agrodealer"), passport.authenticate("local", 
 //     {
