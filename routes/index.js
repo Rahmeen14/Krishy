@@ -61,11 +61,11 @@ router.get("/labor", function(req, res){
         if(!err)
         {
            var data = JSON.stringify(alllabour);
-            fs.writeFileSync('C:/Users/hp/webdev/hackathons/hackeamnsit/public/labour.json', data); 
+            fs.writeFileSync('C:/Users/hp/Desktop/HackeamNsit/public/labour.json', data); 
             //res.render("laborers", {labReq: alllabour});
 
         }
-        res.sendFile("C:/Users/hp/webdev/hackathons/hackeamnsit/public/laborers.html");
+        res.sendFile("C:/Users/hp/Desktop/HackeamNsit/public/laborers.html");
    
 }); });
 router.post("/labor", function(req,res)
@@ -209,7 +209,17 @@ router.get("/farmer/:id",function(req,res){
        {
             console.log("here");
             console.log(allfarmers);
-            res.render("farmerProf", {farmer: allfarmers[0], id: req.params.id});
+              Item.find({"username.id":req.params.id}, function(err, items){
+        if(err)
+        {
+            console.log(err);
+        }
+        else
+        // res.render("items", {items: items});
+       //res.render("agroProf", {agrodealer: agro[0],items:items});
+        res.render("farmerProf", {farmer: allfarmers[0], id: req.params.id,items:items});
+        });
+           
        }
    });
       
@@ -309,6 +319,7 @@ router.post("/:sid/items", function(req, res){
       var sid=req.params.sid;
     User.findById(req.params.sid,function(err,found)
    {
+        console.log(found);
        if(err)
        {
            console.log(err);
@@ -334,7 +345,10 @@ router.post("/:sid/items", function(req, res){
       item.save(function(err){
         if(!err){
           console.log("Saved");
-          res.redirect("/agrodealer/"+req.params.sid);
+          if(found.role=="farmer")
+              res.redirect("/farmer/"+req.params.sid);
+          else
+             res.redirect("/agrodealer/"+req.params.sid);
       }
 
       });
