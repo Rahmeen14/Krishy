@@ -14,22 +14,8 @@
         height: 100%;
       }
    </style>
-   <script type="text/javascript" src="labor.json"></script>
-    <script type="text/javascript">
-       function loadJSON(file, callback) {
-
-    var xobj = new XMLHttpRequest();
-    xobj.overrideMimeType("application/json");
-    xobj.open('GET', file, true); // Replace 'my_data' with the path to your file
-    xobj.onreadystatechange = function () {
-        if (xobj.readyState == 4 && xobj.status == "200") {
-            // Required use of an anonymous callback as .open will NOT return a value but simply returns undefined in asynchronous mode
-            callback(xobj.responseText);
-        }
-    };
-    xobj.send(null);
-}
- 
+       <script type="text/javascript">
+    
   function getLocation()
   {
      navigator.geolocation.getCurrentPosition(function(position){
@@ -53,19 +39,8 @@
         var marker = new google.maps.Marker({
           position: loc,
           map: map
-        }); 
-
-        var my_data= JSON.parse(labor);
-         my_data.forEach(function(f){
-       var loc = new google.maps.LatLng(f.latitude,f.longitude);
-      
-       var marker = new google.maps.Marker({
-          position: loc,
-          map: map
-        });   
-     });
-       
-             /*$.getJSON('labour.json', function(data) {
+        });      
+      $.getJSON('labour.json', function(data) {
        $.each(data, function(i, f) {
        var loc = new google.maps.LatLng(f.latitude,f.longitude);
       
@@ -75,7 +50,7 @@
         });   
      });
 
-   });*/
+   });
       }
 
    navigator.geolocation.getCurrentPosition(initMap);

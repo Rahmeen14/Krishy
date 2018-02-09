@@ -11,7 +11,7 @@ const {requireRole} = require("../server/utils/role");
 const fs = require('fs');
 
 //AUTH ROUTES
-//-----------
+
 //  REGISTER
 router.get("/report/:id", function(req, res){
    res.render("report.ejs", {id:req.params.id});
@@ -53,7 +53,7 @@ router.post("/report/:id", function(req, res){
 router.get("/register",function(req,res){
     res.render("register.ejs");
 });
-router.get("/labor/:id", function(req, res){
+router.get("/labor", function(req, res){
     Labour.find({}, function(err, alllabour){
         if(!err)
         {
@@ -62,11 +62,10 @@ router.get("/labor/:id", function(req, res){
             //res.render("laborers", {labReq: alllabour});
 
         }
-        console.log(__dirname);
-       res.sendFile("C:/Users/hp/webdev/hackathons/hackeamnsit/public/laborers.html");
+        res.sendFile("C:/Users/hp/webdev/hackathons/hackeamnsit/public/laborers.html");
    
 }); });
-router.post("/labor/:id", function(req,res)
+router.post("/labor", function(req,res)
 {
 
   console.log(req);
