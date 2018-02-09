@@ -14,6 +14,7 @@
         height: 100%;
       }
    </style>
+   <script type="text/javascript" src="labor.json"></script>
     <script type="text/javascript">
        function loadJSON(file, callback) {
 
@@ -54,8 +55,8 @@
           map: map
         }); 
 
-        loadJSON("C:/users/hp/webdev/hackathons/hackeamnsit/labour.json", function(data){
-          $.each(data, function(i, f) {
+        var my_data= JSON.parse(labor);
+         my_data.forEach(function(f){
        var loc = new google.maps.LatLng(f.latitude,f.longitude);
       
        var marker = new google.maps.Marker({
@@ -63,7 +64,7 @@
           map: map
         });   
      });
-        });
+       
              /*$.getJSON('labour.json', function(data) {
        $.each(data, function(i, f) {
        var loc = new google.maps.LatLng(f.latitude,f.longitude);

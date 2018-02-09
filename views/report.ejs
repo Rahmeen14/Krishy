@@ -1,0 +1,37 @@
+<% include partials/header %>
+ <div style="width: 300px; margin-top: 100px" class= "ui main container segment">
+        <div class ="ui huge header">Report Malpractices</div>
+        <form  class= "ui fluid form" action="/report/<%=id%>" method="POST">
+            <div class="field">
+                <label>UserName (Optional)</label>
+            <input type="text" placeholder="name" name="user[name]">
+            </div>
+            <div class="field">
+                 <label>Culprit's Name</label>
+                <input type="text" placeholder="culpritName" name="user[culpritName]">
+            </div>
+            <div class="field">
+                 <label>Location</label>
+                <input type="text" placeholder="location" name="user[location]">
+            </div>
+             <div class="field">
+                 <label>Pin Code</label>
+                <input type="text" placeholder="pincode" name="user[pincode]">
+            </div>
+            <div class="field">
+                <label>Malpractice</label>
+                <select name="user[malpractice]" placeholder="merchant">
+                <option value="ExcessFertiliser">ExcessFertiliser</option>
+				<option value="ExcessPesticide">ExcessPesticide</option>
+				<option value="HazardousChemicals">HazardousChemicals</option>
+				<option value="SewageIrrigation">SewageIrrigation</option>
+            </select>
+            </div>
+            
+            <div class="field" style="text-align: center"> <input id='submitbutton' class="button ui primary" type="submit" onclick="function2()">
+            </div>
+
+        </form>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <% include partials/footer%>
