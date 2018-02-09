@@ -199,7 +199,7 @@ router.get("/login",function(req,res){
 });
 router.get("/farmer/:id",function(req,res){
        console.log(req.user);
-       Farmer.find({"email":req.user.email},function(err,allfarmers)
+       Farmer.find({"username.id":req.params.id},function(err,allfarmers)
    {
        if(err)
        {
@@ -219,7 +219,7 @@ router.get("/agrodealer/:id",function(req,res){
 
      //console.log(req.user);
       console.log(req.user);
-       Agrodealer.find({"username.id":req.user.id},function(err,agro)
+    Agrodealer.find({"username.id":req.params.id},function(err,agro)
    {
        if(err)
        {
@@ -242,7 +242,7 @@ router.get("/agrodealer/:id",function(req,res){
        }
    });
    // res.render("agroProf", {agrodealer: req.user});
-}); });
+}); 
 router.get("/buyer/:id", function(req, res){
      Cropbuyer.find({"email":req.user.email},function(err,buyer)
    {
