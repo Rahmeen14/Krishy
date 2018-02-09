@@ -6,29 +6,67 @@ var Farmer= require("../models/farmer.js");
 var Agrodealer= require("../models/agrodealer.js");
 var Cropbuyer= require("../models/cropbuyer.js");
 var passport=require("passport");
+var Report= require("../models/report.js");
 const {requireRole} = require("../server/utils/role");
 const fs = require('fs');
 
 //AUTH ROUTES
 //-----------
 //  REGISTER
+router.get("/report/:id", function(req, res){
+   res.render("report.ejs", {id:req.params.id});
+ });
+router.post("/report/:id", function(req, res){
+  User.findById(req.params.id,function(err,found)
+   {
+       if(err)
+       {
+           console.log(err);
+       }
+       else
+       {
+            console.log(found);
+            var username={
+            id:req.params.id,
+            username:found.username
+          };
+           var report = new Report({
+           name: req.user.name,
+           culprit: req.user.culpritName,
+           malpractice: req.user.malpractice,
+           pin: req.user.pincode,
+           location: req.user.location,
+           username: username
+          });
+
+      report.save(function(err){
+        if(!err){
+          console.log("Saved");
+          res.redirect("/farmer/"+req.params.id);
+      }
+
+      });
+            
+    }
+});
+});
 router.get("/register",function(req,res){
     res.render("register.ejs");
 });
-router.get("/labor", function(req, res){
+router.get("/labor/:id", function(req, res){
     Labour.find({}, function(err, alllabour){
         if(!err)
         {
            var data = JSON.stringify(alllabour);
-            fs.writeFileSync('labour.json', data); 
+            fs.writeFileSync('C:/Users/hp/webdev/hackathons/hackeamnsit/public/labour.json', data); 
             //res.render("laborers", {labReq: alllabour});
 
         }
         console.log(__dirname);
-       res.sendFile("C:/Users/hp/Desktop/hackeam/hack/public/laborers.html");
+       res.sendFile("C:/Users/hp/webdev/hackathons/hackeamnsit/public/laborers.html");
    
 }); });
-router.post("/labor", function(req,res)
+router.post("/labor/:id", function(req,res)
 {
 
   console.log(req);
@@ -157,7 +195,7 @@ router.post("/register", function(req, res){
 router.get("/login",function(req,res){
     res.render("login");
 });
-router.get("/farmer",function(req,res){
+router.get("/farmer/:id",function(req,res){
        console.log(req.user);
        Farmer.find({"email":req.user.email},function(err,allfarmers)
    {
@@ -175,7 +213,7 @@ router.get("/farmer",function(req,res){
       
 
 });
-router.get("/agrodealer",function(req,res){
+router.get("/agrodealer/:id",function(req,res){
      //console.log(req.user);
       console.log(req.user);
        Agrodealer.find({"email":req.user.email},function(err,agro)
@@ -193,7 +231,7 @@ router.get("/agrodealer",function(req,res){
    });
    // res.render("agroProf", {agrodealer: req.user});
 });
-router.get("/buyer", function(req, res){
+router.get("/buyer/:id", function(req, res){
      Cropbuyer.find({"email":req.user.email},function(err,buyer)
    {
        if(err)
@@ -214,14 +252,14 @@ router.post("/login", passport.authenticate("local",
         failureRedirect: "/login"
     }), function(req, res){
             console.log("success");
-             // console.log(req.user);
+              console.log(req.user);
              if (req.user){
                 if(req.user.role == "farmer")
-                 res.redirect('/farmer');
+                 res.redirect('/farmer/'+req.user._id);
                 else if(req.user.role == "agrodealer")
-                res.redirect("/agrodealer");
+                res.redirect("/agrodealer/"+req.user._id);
                 else if(req.user.role == "cropbuyer")
-                    res.redirect("/buyer");
+                    res.redirect("/buyer/"+req.user._id);
             }
         
 });
