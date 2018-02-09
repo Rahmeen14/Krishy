@@ -207,7 +207,7 @@ router.get("/farmer/:id",function(req,res){
        {
             console.log("here");
             console.log(allfarmers);
-            res.render("farmerProf", {farmer: allfarmers[0]});
+            res.render("farmerProf", {farmer: allfarmers[0], id: req.params.id});
        }
    });
       
