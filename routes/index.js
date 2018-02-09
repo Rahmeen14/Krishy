@@ -314,6 +314,82 @@ router.get("/:sid/items/new", function(req, res){
     
 });
 
+router.get("/:sid/buy", function(req, res){
+    
+  res.render("buy",{id:req.params.sid});
+});
+
+router.get("/:sid/fertilisers", function(req, res){
+    
+      Item.find({"type":"Fertilisers"},function(err,items)
+   {
+       if(err)
+       {
+           console.log(err);
+       }
+       else
+       {
+            items.sort({"cost":1});
+            console.log("here");
+          //  console.log(buyer);
+            res.render("itemdisplay", {items: items});
+       }
+   });
+  //res.render("buy",{id:req.params.sid});
+});
+
+router.get("/:sid/machines", function(req, res){
+    Item.find({"type":"Machines"},function(err,items)
+   {
+       if(err)
+       {
+           console.log(err);
+       }
+       else
+       {
+            items.sort({"cost":1});
+            console.log("here");
+          //  console.log(buyer);
+            res.render("itemdisplay", {items: items});
+       }
+   });
+  //res.render("buy",{id:req.params.sid});
+});
+router.get("/:sid/crops", function(req, res){
+    Item.find({"type":"Crops"},function(err,items)
+   {
+       if(err)
+       {
+           console.log(err);
+       }
+       else
+       {
+            items.sort({"cost":1});
+            console.log("here");
+          //  console.log(buyer);
+            res.render("itemdisplay", {items: items});
+       }
+   });
+  //res.render("buy",{id:req.params.sid});
+});
+router.get("/:sid/seeds", function(req, res){
+     Item.find({"type":"Seeds"},function(err,items)
+   {
+       if(err)
+       {
+           console.log(err);
+       }
+       else
+       {
+            items.sort({"cost":1});
+            console.log("here");
+          //  console.log(buyer);
+            res.render("itemdisplay", {items: items});
+       }
+   });
+  //res.render("buy",{id:req.params.sid});
+});
+
 router.post("/:sid/items", function(req, res){
     //Item.create(req.body.item, function(err, newitem){
       var sid=req.params.sid;
