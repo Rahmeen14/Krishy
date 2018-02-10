@@ -32,5 +32,34 @@
             <h1 style="margin-top: 60px"><%=buyer.username.username%></h1>
             <h3><%=buyer.email%></h3>
 
+              <div class="ui main text container segment">
+        <div class="ui huge header">Items Site</div>
+        <div class="ui top attached ">
+                <div class="ui divided items">
+                    <% items.forEach(function(item){ %>
+                    <div class="item">
+                         <div class="image ui medium rounded" style="margin-bottom: 25px"><img src="<%= item.image%>">
+                         </div>
+                    </div>
+                    <div class="content" style="margin-bottom: 25px">
+                     <a class="ui header" > <%= item.name %>
+                     </a>
+                    </div> 
+           <div class="description" style="margin-bottom: 25px">
+            <p><%- item.content %> 
+            <p><%= item.type %></p>
+            <p><%= item.author %></p>
+            <p><%= item.phone %></p>
+            <p><%= item.cost %></p>
+            </p>
+        </div>    
+
+        <%});%>
+                
+            </div>
+        </div>
+        
+        </div>
+
 </body>
 </html>

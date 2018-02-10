@@ -254,7 +254,7 @@ router.get("/agrodealer/:id",function(req,res){
    // res.render("agroProf", {agrodealer: req.user});
 }); 
 router.get("/buyer/:id", function(req, res){
-     Cropbuyer.find({"email":req.user.email},function(err,buyer)
+     Cropbuyer.find({"username.id":req.params.id},function(err,buyer)
    {
        if(err)
        {
@@ -264,7 +264,22 @@ router.get("/buyer/:id", function(req, res){
        {
             console.log("here");
             console.log(buyer);
-            res.render("buyerProf", {buyer: buyer[0]});
+        Item.find({"type":"Crops"},function(err,items)
+      {
+         if(err)
+        {
+           console.log(err);
+        }
+        else
+        {
+            items.sort({"cost":1});
+            console.log("here");
+          //  console.log(buyer);
+          //  res.render("itemdisplay", {items: items});
+            res.render("buyerProf", {buyer: buyer[0],items:items});
+       }
+   });
+            
        }
    });
     //res.render("buyerProf", {buyer: req.user});
