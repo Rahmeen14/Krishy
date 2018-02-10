@@ -10,18 +10,19 @@ We offer a web-based solution that tries to tackle each of these problems in a n
 
 # Tech Stack :
 - We plan to use Node.js 
-- Mongo DB(for database) , 
+- Mongo DB(for data persistence) on cloud,i.e., mlab 
 - Socket.IO (for communication channel)
-- Python(for Machine Learning). 
+- Python(for Machine Learning and data science).
+- Tensorflow for Neural Network
 - Frontend : HTML ,CSS , Javascript
 
 # Features :
-- BUYER'S PORTAL Enable farmers to get seeds and fertilizers at minimum possible prices by cost comparison. Provide a list of nearby markets along with delivery options. Enable nearby markets to buy the produce of farmers online. 
-- SELLER'S PORTAL: Enable agricultural dealers to put up their products (seeds fertilizers, machinery) online . Also enables farmers to put up their produce online. A channel for buyer and seller to communicate directly. 
-- REPORT: A lot of malicious activities are happening in agriculture domains that go unnoticed. Enables the reporting of such activities anonymously. Example: Irrigation of fields using sewage water, overuse of harmful chemicals in farming. 
-- LABORER EMPOWERMENT: The farms that need laborers will be marked red which will be visible to logged in users. Once the work of a laborer on a farm is complete, they can inquire about new work locations from his current employer in case the laborer doesn't have a smartphone and active internet 
-- CROP SUITABILITY: Provides information to farmers on whether the weather conditions are suitable for him to grow a particular crop. If not ,it also gives suggestions regarding the crops that suit the conditions. 
-- MISCELLANEOUS: Provides latest news and other relevant information to farmers which will enable them increase their productivity. Empowers farmers with the invaluable gift of 'awareness'
+- *BUYER'S PORTAL* Enable farmers to get seeds and fertilizers at minimum possible prices by cost comparison. Provide a list of nearby markets along with delivery options. Enable nearby markets to buy the produce of farmers online. 
+- *SELLER'S PORTAL*: Enable agricultural dealers to put up their products (seeds fertilizers, machinery) online . Also enables farmers to put up their produce online. A channel for buyer and seller to communicate directly. 
+- *REPORT*: A lot of malicious activities are happening in agriculture domains that go unnoticed. Enables the reporting of such activities anonymously. Example: Irrigation of fields using sewage water, overuse of harmful chemicals in farming. 
+- *LABORER EMPOWERMENT*: The farms that need laborers will be marked red which will be visible to logged in users. Once the work of a laborer on a farm is complete, they can inquire about new work locations from his current employer in case the laborer doesn't have a smartphone and active internet 
+- *CROP SUITABILITY*: Provides information to farmers on whether the weather conditions are suitable for him to grow a particular crop. If not ,it also gives suggestions regarding the crops that suit the conditions. 
+- *MISCELLANEOUS*: Provides latest news and other relevant information to farmers which will enable them increase their productivity. Empowers farmers with the invaluable gift of 'awareness'
 
 # Building the idea after the campaign:
 We intend to bring our idea into everyday use for farmers to ease their lives. We aim to campaign and create awareness among farmers so that they can easily use our application.
