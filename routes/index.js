@@ -24,8 +24,8 @@ router.post("/report/:id", function(req, res){
            console.log(err);
        }
        else
-       {
-        var role = found.role;
+       { console.log(req.body);
+    var role = found.role;
             console.log(req.body.user);
             console.log(found);
             var username={
@@ -36,8 +36,13 @@ router.post("/report/:id", function(req, res){
            name: req.body.user.name,
            culprit: req.body.user.culpritName,
            malpractice: req.body.user.malpractice,
-           pin: req.body.user.pincode,
-           location: req.body.user.location,
+           street_number: req.body.street_number,
+           autoLoc: req.body.autoLoc,
+           route: req.body.route,
+           locality: req.body.locality,
+           country: req.body.country,
+           state: req.body.state,
+           postal_code: req.body.postal_code,          
            username: username
           });
 
@@ -48,7 +53,6 @@ router.post("/report/:id", function(req, res){
       }
 
       });
-            
     }
 });
 });
