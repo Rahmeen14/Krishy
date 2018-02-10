@@ -17,7 +17,7 @@ def look(placeName, month):
             return(row[4:8])
             
 a,b,c,d = look(placeName,month)
-print()
+print(a,b,c,d)
 #%%
 
             
