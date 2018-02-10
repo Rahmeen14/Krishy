@@ -10,13 +10,16 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.min.css" >
 <style type="text/css">
 body{
-  background-image: url("https://media.istockphoto.com/photos/fresh-green-background-picture-id516689486?k=6&m=516689486&s=612x612&w=0&h=gsqMGoPL0TMi7m7M9yyzM9-vZWC_lDagMZqVkOc0mkI=");
+  background-image: url("http://images.all-free-download.com/images/graphiclarge/green_moss_background_198184.jpg");
   background-size:cover;
   }
   .text.container.segment{
     margin-top: 7em ;
     border: 2px solid white;
 }
+img{
+  height: 300px;
+  width: 300px;
 }
 #delete{
     display:inline;
@@ -50,35 +53,31 @@ body{
                 </ul>
             </div>
               </div></div>
-            <h1 style="margin-top: 60px">Welcome <%=farmer.username.username%></h1>
+            <h1 style="margin-top: 60px; text-align: center">Welcome <%=farmer.username.username%></h1>
 
- <div class="ui main text container segment">
-        <div class="ui huge header">Items Site</div>
+ <div class="ui main text container segment" style=" background-color: rgb(255,250,205); ">
+        <div class="ui huge header" style="color: green">Items on Sale</div>
         <div class="ui top attached ">
                 <div class="ui divided items">
                     <% items.forEach(function(item){ %>
                     <div class="item">
-                         <div class="image ui medium rounded" style="margin-bottom: 25px; width:50%; margin-left: 25%">
+                        
                          <img src="<%= item.image%>">
+                         <div style="display: inline; margin-left: 20px; margin-top: 10px">
+                           <p>Name: <%= item.name %></p>
+                           <p  style="font-weight: 2.5em">Description: <%= item.content %> </p>
+              <p style="font-weight: 2.5em">Type: <%= item.type %></p>
+              <p style="font-weight: 2.5em">Name: <%= item.author %></p>
+              <p style="font-weight: 2.5em">Telephone: <%= item.phone %></p>
+              <p style="font-weight: 2.5em">Cost: Rs. <%= item.cost %></p>
+              <a href="#" class="ui button blue inverted">EDIT POST</a>
+              <a href="#" class="ui button red inverted" style="display: inline">DELETE POST</a>
                          </div>
+                        
                     </div>
-                    <div class="content" style="margin-bottom: 25px">
-                     <a style="margin-left: 45%" class="ui header" href="<%=farmer.username.id%>/items/<%= item._id%>" > <%= item.name %>
-                     </a>
-                    </div> 
-           <div class="description" style="margin-bottom: 25px;margin-left: 35%">
-            <p  style="font-weight: 2.5em">Description: <%= item.content %> </p>
-            <p style="font-weight: 2.5em">Type: <%= item.type %></p>
-            <p style="font-weight: 2.5em">Name: <%= item.author %></p>
-            <p style="font-weight: 2.5em">Telephone: <%= item.phone %></p>
-            <p style="font-weight: 2.5em">Cost: Rs. <%= item.cost %></p>
-          
-        </div>    
-        <div class="extra" style="margin-bottom: 25px;margin-left: 35%">
-             <a class="ui button blue basic" href="/<%=farmer.username.id%>/items/<%= item._id%>/edit">Edit Post</a>
-        <form action="/<%=farmer.username.id%>/items/<%=item._id%>?_method=DELETE" method="POST" style="display: inline">
-        <input type="submit" class="ui button red basic" value="Delete">
-        </a></div>
+ 
+        
+        <hr/>
         <%});%>
                 
             </div>
