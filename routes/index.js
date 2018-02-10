@@ -20,7 +20,7 @@ var spawn = require("child_process").spawn;
 
 //  REGISTER
 router.get("/cropsuitability", function(req, res){
-      res.sendFile("C:/Users/hp/Desktop/HackeamNsit/public/cropsuitability.html");
+      res.sendFile("C:/Users/hp/webdev/hackathons/HackeamNsit/public/cropsuitability.html");
  });
 router.post("/cropsuitability", function(req, res){
    console.log(req.body);
