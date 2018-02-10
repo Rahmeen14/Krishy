@@ -40,7 +40,7 @@ function changeImages()
 
 		changeImages();
 
-	}, 2000);
+	}, 1000);
 	
 	
 }
