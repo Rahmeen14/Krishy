@@ -51,7 +51,7 @@ shell.on('message', function (message) {
   console.log(typeof(message));
   console.log(month);
 
-  var options = {
+  var options2 = {
   mode: 'text',
  // pythonPath: "C:/Users/hp/Anaconda3-2/python.exe",
   pythonPath:"C:/Users/hp/Anaconda3/python.exe",
@@ -59,8 +59,8 @@ shell.on('message', function (message) {
   scriptPath: './',
   args: ["./data/ClimateData.csv",place,month]
 };
-var shell = new PythonShell('lookup.py', options);
-shell.on('message', function (k) {
+var shell2 = new PythonShell('lookup.py', options2);
+shell2.on('message', function (k) {
   console.log("final");
   console.log(k);
  
