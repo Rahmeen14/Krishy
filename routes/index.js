@@ -10,6 +10,10 @@ var passport=require("passport");
 var Report= require("../models/report.js");
 const {requireRole} = require("../server/utils/role");
 const fs = require('fs');
+var PythonShell = require('python-shell'),
+sys = require('sys');
+var spawn = require("child_process").spawn;
+
 
 //AUTH ROUTES
 
@@ -19,6 +23,29 @@ router.get("/cropsuitability", function(req, res){
  });
 router.post("/cropsuitability", function(req, res){
    console.log(req.body);
+   var crop=req.body.crop;
+   var lat=(Number)(req.body.latitude);
+   var long =(Number)(req.body.longitude);
+   console.log(typeof(lat));
+
+   var options = {
+  mode: 'text',
+ // pythonPath: "C:/Users/hp/Anaconda3-2/python.exe",
+  pythonPath:"C:/Users/hp/Anaconda3/python.exe",
+  pythonOptions: ['-u'],
+  scriptPath: './',
+  args: ["./data/LatLong.csv",lat,long]
+};
+var shell = new PythonShell('KNN.py', options);
+shell.on('message', function (message) {
+  console.log(message);
+  // var len = message.length;
+  // message = message.slice(2, len-1);
+  //  console.log("message is"+message);
+  // message = parseFloat(message);
+  // console.log(message);
+  });
+
  });
 router.get("/report/:id", function(req, res){
    res.render("report.ejs", {id:req.params.id});
