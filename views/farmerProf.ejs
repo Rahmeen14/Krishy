@@ -4,11 +4,30 @@
 
 <head>
   <meta charset="utf-8">
-  <title>Chat App</title>
+  <title>Krishy</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
   <link rel="stylesheet" type="text/css" href="/css/style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.min.css" >
-    
+<style type="text/css">
+body{
+  background-image: url("https://media.istockphoto.com/photos/fresh-green-background-picture-id516689486?k=6&m=516689486&s=612x612&w=0&h=gsqMGoPL0TMi7m7M9yyzM9-vZWC_lDagMZqVkOc0mkI=");
+  background-size:cover;
+  }
+  .text.container.segment{
+    margin-top: 7em ;
+    border: 2px solid white;
+}
+}
+#delete{
+    display:inline;
+}
+.huge.header{
+    text-align:center;
+    font-family:georgia;
+    color: purple;
+    font-size: 500em;
+}
+</style>    
 
 </head>
 
@@ -17,11 +36,12 @@
             <div class="ui container">
                 <div class="header item"><a href="/"><i class="certificate icon"></i>KrishY</a></div>
                 <a href="/<%=farmer.username.id%>/buy" class="item"  style="float: right">Buy</a>
-                <a href="/labor" class="item" style="float: right">Find Laborers</a>
                  <a href="/<%=farmer.username.id%>/items/new" class="item">Sell</a>
+                 <a href="/chatTab.html" class="item"  style="float: right">Want to Chat?</a>
+                <a href="/labor" class="item" style="float: right">Find Laborers</a>
                 <a href="/report/<%=farmer.username.id%>" class="item" style="float: right">Report</a>
                 <a href="/cropsuitability" class="item" style="float: right">Am I growing the right crop?</a>
-                <a href="/chatTab.html" class="item"  style="float: right">Want to Chat?</a>
+                
                 <a href="/awareness.html" class="item" style="float: right">Awareness</a>
                  <div class="collapse navbar-collapse">
                 <ul class="nav navbar-nav navbar-right">
@@ -30,8 +50,7 @@
                 </ul>
             </div>
               </div></div>
-            <h1 style="margin-top: 60px"><%=farmer.username.username%></h1>
-            <h3><%=farmer.email%></h3>
+            <h1 style="margin-top: 60px">Welcome <%=farmer.username.username%></h1>
 
  <div class="ui main text container segment">
         <div class="ui huge header">Items Site</div>
@@ -39,22 +58,23 @@
                 <div class="ui divided items">
                     <% items.forEach(function(item){ %>
                     <div class="item">
-                         <div class="image ui medium rounded" style="margin-bottom: 25px"><img src="<%= item.image%>">
+                         <div class="image ui medium rounded" style="margin-bottom: 25px; width:50%; margin-left: 25%">
+                         <img src="<%= item.image%>">
                          </div>
                     </div>
                     <div class="content" style="margin-bottom: 25px">
-                     <a class="ui header" href="<%=farmer.username.id%>/items/<%= item._id%>" > <%= item.name %>
+                     <a style="margin-left: 45%" class="ui header" href="<%=farmer.username.id%>/items/<%= item._id%>" > <%= item.name %>
                      </a>
                     </div> 
-           <div class="description" style="margin-bottom: 25px">
-            <p><%- item.content %> 
-            <p><%= item.type %></p>
-            <p><%= item.author %></p>
-            <p><%= item.phone %></p>
-            <p><%= item.cost %></p>
-            </p>
+           <div class="description" style="margin-bottom: 25px;margin-left: 35%">
+            <p  style="font-weight: 2.5em">Description: <%= item.content %> </p>
+            <p style="font-weight: 2.5em">Type: <%= item.type %></p>
+            <p style="font-weight: 2.5em">Name: <%= item.author %></p>
+            <p style="font-weight: 2.5em">Telephone: <%= item.phone %></p>
+            <p style="font-weight: 2.5em">Cost: Rs. <%= item.cost %></p>
+          
         </div>    
-        <div class="extra" style="margin-bottom: 25px">
+        <div class="extra" style="margin-bottom: 25px;margin-left: 35%">
              <a class="ui button blue basic" href="/<%=farmer.username.id%>/items/<%= item._id%>/edit">Edit Post</a>
         <form action="/<%=farmer.username.id%>/items/<%=item._id%>?_method=DELETE" method="POST" style="display: inline">
         <input type="submit" class="ui button red basic" value="Delete">
