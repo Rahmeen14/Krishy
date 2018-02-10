@@ -22,10 +22,15 @@
         margin: 0;
         padding: 0;
               }
+        body{
+          background-image: url("https://static1.squarespace.com/static/539712a6e4b06a6c9b892bc1/t/53ad5474e4b06e52f1cec50b/1403868287605/");
+                   background-size: cover;
+        }
          
       
    </style>
        <script type="text/javascript">
+        
     
   function getLocation()
   {
@@ -108,29 +113,29 @@
            
                 
             
-              <div class="ui container" style="width: 30%; align-self: center; ">
-               <div class ="ui huge header">Need Labourers?</div>
+              <div class="divy ui container main segment" style="width: 30%; align-self: center; background-color: black; color: white">
+               <div class ="ui huge header" style="color: white">Need Labourers?</div>
                 <form class= "ui fluid form"  action="/labor" method="POST">
-               <div class="field"> <label >
+               <div class="field"  > <label style="color:white" >
                   Email: <input type="text" name="email">
                 </label></div>
                 
-               <div class="field"> <label >
+               <div class="field" > <label  style="color:white">
                   Number: <input type="text" name="number">
                 </label></div>
                 
-               <div class="field"> <label >
+               <div class="field" > <label  style="color:white">
 
                  Latitude: <input id="latitude" type="text" name="latitude" value="">
                 </label></div>
                 
-               <div class="field"> <label >
+               <div class="field" > <label  style="color:white">
                  Longitude: <input id="longitude" type="text" name="longitude" value="">
 
                 </label></div>
             
 
-                <button type="Submit">Submit</button>
+                <button class="ui green button inverted " type="Submit">Submit</button>
               </form> 
 
               </div>
