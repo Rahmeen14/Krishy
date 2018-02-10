@@ -1,4 +1,5 @@
 var express = require("express");
+var moment = require("moment");
 var router  = express.Router();
 var User=require("../models/user.js");
 var Labour= require("../models/labour.js");
@@ -44,6 +45,24 @@ shell.on('message', function (message) {
   //  console.log("message is"+message);
   // message = parseFloat(message);
   // console.log(message);
+  month=moment().format('MMMM');
+  console.log(typeof(month));
+  console.log(typeof(message));
+  console.log(month);
+  var options = {
+  mode: 'text',
+ // pythonPath: "C:/Users/hp/Anaconda3-2/python.exe",
+  pythonPath:"C:/Users/hp/Anaconda3/python.exe",
+  pythonOptions: ['-u'],
+  scriptPath: './',
+  args: ["./data/ClimateData.csv",message,month]
+};
+var shell = new PythonShell('lookup.py', options);
+shell.on('message', function (message) {
+  console.log("final");
+  console.log(message);
+ 
+  });
   });
 
  });
