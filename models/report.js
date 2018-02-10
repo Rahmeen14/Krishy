@@ -7,17 +7,33 @@ var passportLocalMongoose = require("passport-local-mongoose");
         type: String
         
     },
-    location: {
+    locality: {
         type: String
 
     },
-    pin: {
+    postal_code: {
       type: Number
     },
     name: {
       type: String
     },
     culprit: {
+      type: String
+    },
+
+    state: {
+      type: String
+    },
+    country: {
+      type: String
+    },
+    autoLoc: {
+      type: String
+    },
+    street_number: {
+      type: String
+    },
+    route:{
       type: String
     },
     username: {
