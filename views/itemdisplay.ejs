@@ -8,7 +8,29 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
   <link rel="stylesheet" type="text/css" href="/css/style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.min.css" >
-    
+  <style type="text/css">
+body{
+  background-image: url("http://images.all-free-download.com/images/graphiclarge/green_moss_background_198184.jpg");
+  background-size:cover;
+  }
+  .text.container.segment{
+    margin-top: 7em ;
+    border: 2px solid white;
+}
+img{
+  height: 300px;
+  width: 300px;
+}
+#delete{
+    display:inline;
+}
+.huge.header{
+    text-align:center;
+    font-family:georgia;
+    color: purple;
+    font-size: 500em;
+}
+</style>    
 
 </head>
 
@@ -30,28 +52,29 @@
               </div></div>
            
 
-        <div class="ui main text container segment">
-        <div class="ui huge header">Items Site</div>
+       <div class="ui main text container segment" style=" background-color: rgb(255,250,205); ">
+        <div class="ui huge header" style="color: green">Items on Sale</div>
         <div class="ui top attached ">
                 <div class="ui divided items">
                     <% items.forEach(function(item){ %>
                     <div class="item">
-                         <div class="image ui medium rounded" style="margin-bottom: 25px"><img src="<%= item.image%>">
+                        
+                         <img src="<%= item.image%>">
+                         <div style="display: inline; margin-left: 20px; margin-top: 10px">
+                           <p>Name: <%= item.name %></p>
+                           <p  style="font-weight: 2.5em">Description: <%= item.content %> </p>
+              <p style="font-weight: 2.5em">Type: <%= item.type %></p>
+              <p style="font-weight: 2.5em">Name: <%= item.author %></p>
+              <p style="font-weight: 2.5em">Telephone: <%= item.phone %></p>
+              <p style="font-weight: 2.5em">Cost: Rs. <%= item.cost %></p>
+              <a href="#" class="ui button blue inverted">EDIT POST</a>
+              <a href="#" class="ui button red inverted" style="display: inline">DELETE POST</a>
                          </div>
+                        
                     </div>
-                    <div class="content" style="margin-bottom: 25px">
-                     <a class="ui header" > <%= item.name %>
-                     </a>
-                    </div> 
-           <div class="description" style="margin-bottom: 25px">
-            <p><%- item.content %> 
-            <p><%= item.type %></p>
-            <p><%= item.author %></p>
-            <p><%= item.phone %></p>
-            <p><%= item.cost %></p>
-            </p>
-        </div>    
-
+ 
+        
+        <hr/>
         <%});%>
                 
             </div>

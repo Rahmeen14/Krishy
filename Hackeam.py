@@ -1,78 +1,77 @@
-'''
-@author: Sarthak Tandon
- 
-This file takes as input, the features of user pertaining weather and other factors 
-to determine whether a certain crop is feasible for a farmer given his location, time of 
-year and other such factors
-
-The code below implements a neural network to accomplish the same.
-'''
-
-
 import tensorflow as tf
+import numpy as np
 import pandas as pd
 
 RANDOM_SEED = 42
 tf.set_random_seed(RANDOM_SEED)
-num_epochs = 100
 
 def init_weights(shape):
     weights = tf.random_normal(shape, stddev=0.1)
     return tf.Variable(weights)
 
-def forwardprop(X, w_1, w_2, b_1, b_2):
-    h = tf.nn.sigmoid(tf.matmul(X, w_1) + b_1)
-    yhat = tf.matmul(h, w_2) + b_2
+def forwardprop(X, w_1, w_2):
+    h    = tf.nn.sigmoid(tf.matmul(X, w_1))
+    yhat = tf.matmul(h, w_2)
     return yhat
 
 def get_data():
-    inputData = pd.read_csv(r'C:\Users\Shreya\Desktop\Climate Data.csv')
-    all_X = tf.constant(inputData[4:8])
-    all_Y = tf.constant(inputData[8:14])
-    return all_X, all_Y
 
-train_X, train_y = get_data()
-# Layer's sizes
-x_size = 4  # Number of input nodes
-h_size = 5  # Number of hidden nodes
-y_size = 6  # Number of outcomes 
+    df = pd.read_csv(r'C:\Users\Shreya\Desktop\Climate Data.csv')
+    df = df.values
+    Xdata = df[:,5:8]
+    Ydata = df[:,8:14]
 
-# Symbols
-# X = tf.placeholder("float", shape=[None, x_size])
-# y = tf.placeholder("float", shape=[None, y_size])
+    # Prepend the column of 1s for bias
+    N, M  = Xdata.shape
+    all_X = np.ones((N, M + 1))
+    all_X[:, 1:] = Xdata
 
-# Weight initializations
-w_1 = init_weights((x_size, h_size))
-w_2 = init_weights((h_size, y_size))
-b_1init = init_weights((None, h_size))
-b_2init = init_weights((None, y_size))
-b_1 = tf.Variable(dtype = tf.float64, expected_shape = [1332, h_size])
-b_2 = tf.Variable(dtype = tf.float64, expected_shape = [1332, y_size])
+    all_Y = Ydata
+    return all_X, all_Y   
 
-for i in range(1332):
-    b_1[i] = b_1init
+def predict(w_1, w_2, t1, t2, r, s, crop):
+    X = tf.constant([[t1, t2, r, s]])
+    yhat = forwardprop(X, w_1, w_2)
+    cropMap = {'wheat':0, 'maize':1, 'rice':2, 'pulse':3, 'sugarcane':4, 'jute':5}
+    prediction = tf.argmax(yhat, axis=1)
+    print(prediction == cropMap[crop])
+
+
+def main(t1, t2, r, s, crop):
+
+    train_X, train_y = get_data()
+       
+    # Layer's sizes
+    x_size = 4   # Number of input nodes: 4 features and 1 bias
+    h_size = 5   # Number of hidden nodes
+    y_size = 6   # Number of outcomes (3 iris flowers)
+
+    # Symbols
+    X = tf.placeholder("float", shape=[None, x_size])
+    y = tf.placeholder("float", shape=[None, y_size])
+
+    # Weight initializations
+    w_1 = init_weights((x_size, h_size))
+    w_2 = init_weights((h_size, y_size))
+
+    # Forward propagation
+    yhat    = forwardprop(X, w_1, w_2)
+
+    # Backward propagation
+    cost    = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(labels=y, logits=yhat))
+    updates = tf.train.GradientDescentOptimizer(0.01).minimize(cost)
+
+    # Run SGD
+    sess = tf.Session()
+    init = tf.global_variables_initializer()
+    sess.run(init)
+
+    for epoch in range(100):
+        # Train with each example
+        for i in range(1332):
+            sess.run(updates, feed_dict={X: train_X[i: i + 1], y: train_y[i: i + 1]})
+    sess.close()
+    predict(w_1, w_2, t1, t2, r, s, crop)
     
-for i in range(1332):
-    b_2[i] = b_2init
-
-
-# Forward propagation
-yhat    = forwardprop(train_X, w_1, w_2, b_1, b_2)
-
-# Backward propagation
-cost    = tf.reduce_sum(tf.reduce_sum(tf.square(tf.subtract(train_y,yhat)), 1),0)
-updates = tf.train.GradientDescentOptimizer(0.01).minimize(cost)
-
-# Run
-sess = tf.Session()
-init = tf.global_variables_initializer()
-sess.run(init)
-
-for epoch in range(num_epochs):
-    # Train with each example
-    sess.run(updates)
-sess.close()
-
+main(10.0,15.0,55.0,10.0,'jute')
 #%%
-    
-    
