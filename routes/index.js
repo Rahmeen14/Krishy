@@ -40,6 +40,7 @@ router.post("/cropsuitability", function(req, res){
 var shell = new PythonShell('KNN.py', options);
 shell.on('message', function (message) {
   console.log(message);
+  var place=message;
   // var len = message.length;
   // message = message.slice(2, len-1);
   //  console.log("message is"+message);
@@ -49,18 +50,19 @@ shell.on('message', function (message) {
   console.log(typeof(month));
   console.log(typeof(message));
   console.log(month);
+
   var options = {
   mode: 'text',
  // pythonPath: "C:/Users/hp/Anaconda3-2/python.exe",
   pythonPath:"C:/Users/hp/Anaconda3/python.exe",
   pythonOptions: ['-u'],
   scriptPath: './',
-  args: ["./data/ClimateData.csv",message,month]
+  args: ["./data/ClimateData.csv",place,month]
 };
 var shell = new PythonShell('lookup.py', options);
-shell.on('message', function (message) {
+shell.on('message', function (k) {
   console.log("final");
-  console.log(message);
+  console.log(k);
  
   });
   });
