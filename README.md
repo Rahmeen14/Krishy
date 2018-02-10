@@ -27,3 +27,13 @@ We offer a web-based solution that tries to tackle each of these problems in a n
 
 ## Building the idea after the campaign:
 We intend to bring our idea into everyday use for farmers to ease their lives. We aim to campaign and create awareness among farmers so that they can easily use our application.
+
+
+```
+clone this repo
+cd into it
+npm install 
+nodemon server/server.js
+```
+
+Browse to ```localhost:3000```
