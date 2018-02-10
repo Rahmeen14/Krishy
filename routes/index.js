@@ -20,7 +20,7 @@ var spawn = require("child_process").spawn;
 
 //  REGISTER
 router.get("/cropsuitability", function(req, res){
-      res.sendFile("C:/Users/hp/webdev/hackathons/HackeamNsit/public/cropsuitability.html");
+      res.sendFile("C:/Users/hp/Desktop/HackeamNsit/public/cropsuitability.html");
  });
 router.post("/cropsuitability", function(req, res){
    console.log(req.body);
@@ -28,14 +28,14 @@ router.post("/cropsuitability", function(req, res){
    var lat=(Number)(req.body.latitude);
    var long =(Number)(req.body.longitude);
    console.log(typeof(lat));
-
+   month=moment().format('MMMM');
    var options = {
   mode: 'text',
  // pythonPath: "C:/Users/hp/Anaconda3-2/python.exe",
   pythonPath:"C:/Users/hp/Anaconda3/python.exe",
   pythonOptions: ['-u'],
   scriptPath: './',
-  args: ["./data/LatLong.csv",lat,long]
+  args: ["./data/LatLong.csv","./data/ClimateData.csv",lat,long,month]
 };
 var shell = new PythonShell('KNN.py', options);
 shell.on('message', function (message) {
@@ -46,25 +46,25 @@ shell.on('message', function (message) {
   //  console.log("message is"+message);
   // message = parseFloat(message);
   // console.log(message);
-  month=moment().format('MMMM');
-  console.log(typeof(month));
-  console.log(typeof(message));
-  console.log(month);
+//   month=moment().format('MMMM');
+//   console.log(typeof(month));
+//   console.log(typeof(message));
+//   console.log(month);
 
-  var options = {
-  mode: 'text',
- // pythonPath: "C:/Users/hp/Anaconda3-2/python.exe",
-  pythonPath:"C:/Users/hp/Anaconda3/python.exe",
-  pythonOptions: ['-u'],
-  scriptPath: './',
-  args: ["./data/ClimateData.csv",place,month]
-};
-var shell = new PythonShell('lookup.py', options);
-shell.on('message', function (k) {
-  console.log("final");
-  console.log(k);
+//   var options = {
+//   mode: 'text',
+//  // pythonPath: "C:/Users/hp/Anaconda3-2/python.exe",
+//   pythonPath:"C:/Users/hp/Anaconda3/python.exe",
+//   pythonOptions: ['-u'],
+//   scriptPath: './',
+//   args: ["./data/ClimateData.csv",place,month]
+// };
+// var shell = new PythonShell('lookup.py', options);
+// shell.on('message', function (k) {
+//   console.log("final");
+//   console.log(k);
  
-  });
+//   });
   });
 
  });

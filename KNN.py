@@ -7,8 +7,8 @@ import sys
 import pandas as pd
 locationData = pd.read_csv(sys.argv[1])
 
-lat = (float(sys.argv[2]))
-lng = (float(sys.argv[3]))
+lat = (float(sys.argv[3]))
+lng = (float(sys.argv[4]))
 def KNN(lat, lon):
     
     minDistPlace = 'Not Found'
@@ -21,6 +21,18 @@ def KNN(lat, lon):
             minVal = val
     return minDistPlace
 place=KNN(lat,lng)
-print(place)
+
+lookup =pd.read_csv(sys.argv[2])
+
+#placeName = (sys.argv[2])
+month = (sys.argv[5])
+
+def look(place, month):
+    for index, row in lookup.iterrows():
+        if row[0] == place and row[1] == month:
+            return(row[4:8])
+            
+a,b,c,d= look(place,month)
+print(a,b,c,d)
 #%%
 
