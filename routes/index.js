@@ -19,7 +19,7 @@ var spawn = require("child_process").spawn;
 
 //  REGISTER
 router.get("/cropsuitability", function(req, res){
-      res.sendFile("C:/Users/hp/Desktop/HackeamNsit/public/cropsuitability.html");
+      res.sendFile("C:/Users/hp/webdev/hackathons/HackeamNsit/public/cropsuitability.html");
  });
 router.post("/cropsuitability", function(req, res){
    console.log(req.body);
@@ -98,11 +98,11 @@ router.get("/labor", function(req, res){
         if(!err)
         {
            var data = JSON.stringify(alllabour);
-            fs.writeFileSync('C:/Users/hp/Desktop/HackeamNsit/public/labour.json', data); 
+            fs.writeFileSync('C:/Users/hp/webdev/hackathons/HackeamNsit/public/labour.json', data); 
             //res.render("laborers", {labReq: alllabour});
 
         }
-        res.sendFile("C:/Users/hp/Desktop/HackeamNsit/public/laborers.html");
+        res.sendFile("C:/Users/hp/webdev/hackathons/HackeamNsit/public/laborers.html");
    
 }); });
 router.post("/labor", function(req,res)

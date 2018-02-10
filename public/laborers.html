@@ -21,7 +21,8 @@
         height: 100%;
         margin: 0;
         padding: 0;
-      }
+              }
+         
       
    </style>
        <script type="text/javascript">
@@ -74,7 +75,8 @@
 
 </head>
 <body onload="getLocation()">
-    <div id="map" class="ui container"></div>
+    <div class="row"></div>
+    <div id="map" class="ui container" style="width: 70%; align-self: center"></div>
 	<script type="text/javascript" src="/js/laborers.js"></script>
 
 
@@ -100,27 +102,39 @@
                 <a href="/chatTab.html" class="item"  style="float: right">Want to Chat?</a>
                 <a href="/awareness.html" class="item" style="float: right">Awareness</a>
                 
-              </div></div>
-
-              <h1 style="margin-top: 100px">Labourers Page</h1>
-                <form action="/labor" method="POST">
-                <label>
+              </div>
+            </div>
+           
+           
+                
+            
+              <div class="ui container" style="width: 30%; align-self: center; ">
+               <div class ="ui huge header">Need Labourers?</div>
+                <form class= "ui fluid form"  action="/labor" method="POST">
+               <div class="field"> <label >
                   Email: <input type="text" name="email">
-                </label>
-                <label>
+                </label></div>
+                
+               <div class="field"> <label >
                   Number: <input type="text" name="number">
-                </label>
-                <label>
+                </label></div>
+                
+               <div class="field"> <label >
 
                  Latitude: <input id="latitude" type="text" name="latitude" value="">
-                </label>
-                <label>
+                </label></div>
+                
+               <div class="field"> <label >
                  Longitude: <input id="longitude" type="text" name="longitude" value="">
 
-                </label>
+                </label></div>
             
 
                 <button type="Submit">Submit</button>
-              </form>
+              </form> 
+
+              </div>
+
+             
 </body>
 </html>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Labourers</title>
+  <title>Crop suitability</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
   <link rel="stylesheet" type="text/css" href="/css/style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.min.css" >
@@ -16,6 +16,11 @@
         height: 100%;
         margin: 0;
         padding: 0;
+      }
+      body{
+        background-image: url("https://www.teagasc.ie/media/website/crops/Crops-landing-image.jpg");
+        background-repeat: no-repeat;
+        background-size: cover;
       }
       
    </style>
@@ -47,23 +52,27 @@
                </div>
                </div>
               
-            
+            <!-- <div class="ui container" style="width: 30%; align-self: center; ">
+               <div class ="ui huge header">Need Labourers?</div>
+                <form class= "ui fluid form"  action="/labor" method="POST">-->
 
-              <h1 style="margin-top: 100px">Labourers Page</h1>
-                <form action="/cropsuitability" method="POST">
-                <label>
+             <div  class="ui main segment container" style="margin-top: 100px; width: 30%; align-self: center; color: white; background-color: black ">
+               <div class ="ui huge header" style="color: white">Are you growing the right crop?</div>
+                <form class="ui fluid form" action="/cropsuitability" method="POST">
+                <label class="field" >
                  Crop: <input type="text" name="crop">
                 </label>
-
+                <label class="field">
                 Latitude: <input id="latitude" type="text" name="latitude" value="">
                 </label>
-                <label>
+                <label class="field">
                  Longitude: <input id="longitude" type="text" name="longitude" value="">
 
                 </label>
             
 
-                <button type="Submit">Submit</button>
+                <button class="ui green inverted button" style="align-content: center" type="Submit">Submit</button>
               </form>
+            </div>
 </body>
 </html>
