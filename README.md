@@ -5,6 +5,7 @@ An in-person visit to a nearby sub-urban farming area in Delhi brought to foregr
 - Foul agricultural malpractices of fellow-farmers that need reporting 
 - Crop yield uncertainty * Price disparity on both buying(of seeds) and selling(of crops) ends 
 - Lack of awareness of new developments in agriculture
+-Price disparity on both buying(of seeds) and selling(of crops) ends
 
 ## Solution we offer:
 We offer a web-based solution that tries to tackle each of these problems in a near efficient way. We intend to revolutionize agriculture in our own little attempt. We hope to build an interactive portal where buyers and sellers can communicate to ensure most profitable business, where malpractice (like irrigation with sewage water, injecting crops with chemicals for quick yield) can be reported , where laborers get easy employment opportunities (one farmer directing laborers to another farm where they're needed while paying them off ) and where farmers get all relevant information related to crops and agriculture. This will impact farmers to make them more aware, informed, independent. The laborers will find quick employment; people will have better quality food and the government will be geared into action. The country’s farming front (crucial to its economy) will be strengthened and change will be made.
