@@ -20,7 +20,8 @@ var spawn = require("child_process").spawn;
 
 //  REGISTER
 router.get("/cropsuitability", function(req, res){
-      res.sendFile("C:/Users/hp/Desktop/HackeamNsit/public/cropsuitability.html");
+     // res.sendFile("C:/Users/hp/Desktop/HackeamNsit/public/cropsuitability.html");
+     res.render("cropsuitability",{data:null});
  });
 router.post("/cropsuitability", function(req, res){
    console.log(req.body);
@@ -35,12 +36,18 @@ router.post("/cropsuitability", function(req, res){
   pythonPath:"C:/Users/hp/Anaconda3/python.exe",
   pythonOptions: ['-u'],
   scriptPath: './',
-  args: ["./data/LatLong.csv","./data/ClimateData.csv",lat,long,month]
+  args: ["./data/LatLong.csv","./data/ClimateData.csv",lat,long,month,crop]
 };
 var shell = new PythonShell('KNN.py', options);
 shell.on('message', function (message) {
   console.log(message);
-  var place=message;
+  var mes;
+  if(message==0)
+    mes="The conditions are not suitable for growing "+crop;
+  else
+    mes="Congratulations, The conditions are suitable for growing "+crop;
+  res.render("cropsuitability",{data:message,mes:mes});
+  //var place=message;
   // var len = message.length;
   // message = message.slice(2, len-1);
   //  console.log("message is"+message);
