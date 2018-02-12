@@ -3,7 +3,8 @@
 An in-person visit to a nearby sub-urban farming area in Delhi brought to foreground the following problems of a humble, mundane framer: 
 - Laborer deficit (hard to find laborers) 
 - Foul agricultural malpractices of fellow-farmers that need reporting 
-- Crop yield uncertainty * Price disparity on both buying(of seeds) and selling(of crops) ends 
+- Crop yield uncertainty
+- Price disparity on both buying(of seeds) and selling(of crops) ends 
 - Lack of awareness of new developments in agriculture
 - Price disparity on both buying(of seeds) and selling(of crops) ends
 
