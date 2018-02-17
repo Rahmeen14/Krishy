@@ -433,7 +433,7 @@ router.get("/:sid/machines", function(req, res){
             res.render("itemdisplay", {items: items});
        }
    });
-  //res.render("buy",{id:req.params.sid});
+ 
 });
 router.get("/:sid/crops", function(req, res){
     Item.find({"type":"Crops"},function(err,items)
@@ -511,9 +511,7 @@ router.post("/:sid/items", function(req, res){
             
     }
 });
-        
-      //  res.redirect("/items");
-    //});
+ 
     
 });
 
@@ -531,33 +529,7 @@ router.delete("/:sid/items/:id", function(req, res){
         
     });
 });
-// router.post("/login",requireRole("agrodealer"), passport.authenticate("local", 
-//     {
-//         failureRedirect: "/login"
-//     }),function(req, res){
-//             console.log(res.user);
-//             res.redirect('/');
-        
 
-// });
-// router.post('/login', passport.authenticate("local", function(err, user ,res){
-//     var error = err;
-//     if (error) return res.status(401).json(error);
-//     if (!user) return res.status(404).json({message: 'Something went wrong, please try again.'});
-
-//     else {
-//         if(requireRole("farmer")){
-//             res.redirect('/farmer');
-//         }
-//         else if(requireRole("agrodealer")){
-//             res.redirect('/farmer');
-//         }
-//         else{
-//             res.redirect('/crop-buyer');
-//         }
-//     }
-// }));
-//LOGOUT
 router.get("/logout",function(req,res){
    req.logout(); 
   // req.flash("success","Logged You Out!!");
